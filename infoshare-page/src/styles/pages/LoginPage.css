@@ -1,0 +1,152 @@
+.login-page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #f5f7f8;
+    /* background-light */
+    color: #0f172a;
+    /* slate-900 */
+    font-family: 'Inter', sans-serif;
+}
+
+.login-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bg-accent {
+    position: absolute;
+    background-color: rgba(158, 223, 255, 0.1);
+    /* primary/10 */
+}
+
+.bg-accent-1 {
+    top: -10%;
+    left: -5%;
+    width: 40%;
+    height: 40%;
+    border-radius: 50%;
+    filter: blur(64px);
+}
+
+.bg-accent-2 {
+    top: 60%;
+    right: -10%;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    filter: blur(64px);
+    background-color: rgba(158, 223, 255, 0.05);
+    /* primary/5 */
+}
+
+.bg-accent-3 {
+    bottom: 0;
+    left: 25%;
+    width: 30%;
+    height: 30%;
+    transform: rotate(45deg);
+    opacity: 0.2;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.login-main {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 440px;
+    background-color: #ffffff;
+    border-radius: 0.75rem;
+    /* rounded-xl */
+    box-shadow: 0 20px 25px -5px rgba(226, 232, 240, 0.5), 0 8px 10px -6px rgba(226, 232, 240, 0.5);
+    /* shadow-xl slate-200/50 */
+    border: 1px solid #f1f5f9;
+    /* slate-100 */
+    padding: 2rem;
+}
+
+@media (min-width: 768px) {
+    .login-card {
+        padding: 2.5rem;
+    }
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-title {
+    font-size: 1.875rem;
+    /* text-3xl */
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    /* tracking-tight */
+    margin: 0 0 0.5rem 0;
+}
+
+.login-subtitle {
+    color: #64748b;
+    /* slate-500 */
+    font-size: 0.875rem;
+    margin: 0;
+}
+
+.signup-prompt {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #475569;
+    /* slate-600 */
+    margin-top: 2rem;
+}
+
+.signup-link {
+    color: #9edfff;
+    /* primary */
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+/* Dark mode */
+:global(.dark) .login-page {
+    background-color: #0f1c23;
+    /* background-dark */
+    color: #f1f5f9;
+    /* slate-100 */
+}
+
+:global(.dark) .login-card {
+    background-color: #0f172a;
+    /* slate-900 */
+    box-shadow: none;
+    border-color: #1e293b;
+    /* slate-800 */
+}
+
+:global(.dark) .login-subtitle {
+    color: #94a3b8;
+    /* slate-400 */
+}
+
+:global(.dark) .signup-prompt {
+    color: #94a3b8;
+}
