@@ -1,0 +1,55 @@
+.guide-card {
+    border-radius: 0.75rem;
+    /* rounded-xl */
+    background: linear-gradient(to bottom right, rgba(158, 223, 255, 0.2), rgba(158, 223, 255, 0.4));
+    /* bg-gradient... */
+    padding: 1.5rem;
+    /* p-6 */
+}
+
+.guide-card-title {
+    margin: 0;
+    font-size: 1.125rem;
+    /* text-lg */
+    font-weight: 700;
+    /* font-bold */
+    color: #1e293b;
+    /* text-slate-800 */
+}
+
+.guide-card-desc {
+    margin: 0.5rem 0 0 0;
+    /* mt-2 */
+    font-size: 0.875rem;
+    /* text-sm */
+    color: #334155;
+    /* text-slate-700 */
+}
+
+.guide-card-link {
+    margin-top: 1rem;
+    /* mt-4 */
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* gap-2 */
+    font-size: 0.875rem;
+    /* text-sm */
+    font-weight: 700;
+    /* font-bold */
+    color: #0f172a;
+    /* text-slate-900 */
+    text-decoration: none;
+    transition: all 0.2s;
+    /* transition-all */
+}
+
+.guide-card-link:hover {
+    gap: 0.75rem;
+    /* hover:gap-3 */
+}
+
+.guide-card-link-icon {
+    font-size: 0.875rem !important;
+    /* text-sm */
+}

@@ -42,8 +42,10 @@ export const SearchBar: React.FC = () => {
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
             </div>
-            {/* type="submit"으로 설정하여 폼 제출 이벤트와 연결합니다. */}
-            <Button type="submit" className="title-bar-search-btn">
+            <Button
+                type="submit"
+                className="title-bar-search-btn"
+            >
                 {TITLE_BAR.SEARCH_BTN}
             </Button>
         </form>

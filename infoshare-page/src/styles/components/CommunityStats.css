@@ -1,0 +1,62 @@
+.community-container {
+    border-radius: 0.75rem;
+    /* rounded-xl */
+    background-color: white;
+    /* bg-white */
+    padding: 1.5rem;
+    /* p-6 */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    /* shadow-sm */
+    border: 1px solid #f1f5f9;
+    /* border-slate-100 */
+}
+
+.community-container-title {
+    margin: 0 0 1rem 0;
+    /* mb-4 */
+    font-size: 1.125rem;
+    /* text-lg */
+    font-weight: 700;
+    /* font-bold */
+}
+
+.community-container-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    /* gap-4 */
+}
+
+.community-container-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    /* gap-1 */
+}
+
+.community-container-value {
+    margin: 0;
+    font-size: 1.5rem;
+    /* text-2xl */
+    font-weight: 900;
+    /* font-black */
+    color: #9edfff;
+    /* text-primary */
+}
+
+.community-container-label {
+    margin: 0;
+    font-size: 0.75rem;
+    /* text-xs */
+    font-weight: 600;
+    /* font-semibold */
+    text-transform: uppercase;
+    /* uppercase */
+    color: #64748b;
+    /* text-slate-500 */
+}
+
+.community-container-join-btn {
+    margin-top: 1.5rem;
+    width: 100%;
+}

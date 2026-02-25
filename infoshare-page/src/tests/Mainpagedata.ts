@@ -47,6 +47,7 @@ export const MAIN_TEXT_TEST = {
             }
         ]
     },
+
     SIDEBAR: {
         STATS_TITLE: "Community Stats",
         STATS: [

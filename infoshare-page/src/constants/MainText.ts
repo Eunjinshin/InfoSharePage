@@ -17,3 +17,8 @@ export const POPULAR_POSTS = {
 export const LATEST_POSTS = {
     SECTION_TITLE: "Latest Posts"
 }
+
+export const SIDEBAR = {
+    STATS_TITLE: "Community Stats",
+    CONTRIBUTORS_TITLE: "Top Contributors"
+}
