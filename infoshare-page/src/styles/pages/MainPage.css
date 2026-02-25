@@ -1,0 +1,50 @@
+.main-page {
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    overflow-x: hidden;
+    background-color: #f5f7f8;
+    /* bg-background-light */
+}
+
+/* Dark mode generic support for page */
+:global(.dark) .main-page {
+    background-color: #0f1c23;
+    /* bg-background-dark */
+}
+
+.main-content-layout {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1280px;
+    padding: 2rem 1.5rem;
+    /* py-8 px-6 */
+}
+
+.main-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 2rem;
+    /* gap-8 */
+}
+
+@media (min-width: 1024px) {
+    .main-grid-layout {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.main-left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    /* space-y-8 */
+}
+
+@media (min-width: 1024px) {
+    .main-left-column {
+        grid-column: span 2 / span 2;
+    }
+}

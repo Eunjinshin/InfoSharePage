@@ -1,0 +1,101 @@
+.header {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #9edfff;
+}
+
+.header-logo h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: #0f172a;
+    margin: 0;
+}
+
+.header-nav-container {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.header-nav {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .header {
+        padding: 1rem 5rem;
+    }
+
+    .header-nav {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .header {
+        padding: 1rem 10rem;
+    }
+}
+
+.header-nav a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #0f172a;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.header-nav a:hover {
+    color: #9edfff;
+}
+
+.header-signup-btn {
+    background-color: #9edfff;
+    color: #0f1c23;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: filter 0.2s, background-color 0.2s;
+}
+
+.header-signup-btn:hover {
+    /* 기존 brightness(1.05) 를 (0.9) 로 변경하여 색상을 어둡고 진하게 만듭니다. */
+    filter: brightness(0.9);
+}
+
+/* Dark mode overrides (optional fallback if class="dark" is used) */
+:global(.dark) .header {
+    background-color: rgba(15, 28, 35, 0.7);
+    border-bottom-color: #1e293b;
+}
+
+:global(.dark) .header-logo h2 {
+    color: #f1f5f9;
+}
+
+:global(.dark) .header-nav a {
+    color: #f1f5f9;
+}

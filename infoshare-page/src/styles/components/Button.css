@@ -1,0 +1,19 @@
+.custom-btn {
+    background-color: #9edfff;
+    color: #0f1c23;
+    font-weight: 700;
+    padding: 0.875rem 1.25rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(158, 223, 255, 0.2), 0 2px 4px -2px rgba(158, 223, 255, 0.2);
+    transition: filter 0.2s, background-color 0.2s;
+    font-size: 1rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-btn:hover {
+    filter: brightness(0.9);
+}

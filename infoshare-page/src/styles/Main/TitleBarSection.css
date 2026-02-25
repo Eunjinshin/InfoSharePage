@@ -1,0 +1,61 @@
+.title-bar-section {
+    position: relative;
+    margin-bottom: 3rem;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    background-color: #0f172a;
+    padding: 2rem;
+}
+
+@media (min-width: 768px) {
+    .title-bar-section {
+        padding: 4rem;
+    }
+}
+
+.title-bar-bg-wrapper {
+    position: absolute;
+    inset: 0;
+    opacity: 0.4;
+}
+
+.title-bar-bg-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.title-bar-gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, #0f172a, rgba(15, 23, 42, 0.8), transparent);
+}
+
+.title-bar-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    max-width: 42rem;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.title-bar-title {
+    font-size: 2.25rem;
+    font-weight: 900;
+    line-height: 1.25;
+    color: white;
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+    .title-bar-title {
+        font-size: 3rem;
+    }
+}
+
+.title-bar-subtitle {
+    font-size: 1.125rem;
+    color: #cbd5e1;
+    margin: 0;
+}

@@ -1,0 +1,99 @@
+.social-login-container {
+    margin: 2rem 0;
+}
+
+.divider-wrapper {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.divider-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #e2e8f0;
+    /* slate-200 */
+    transform: translateY(-50%);
+}
+
+.divider-text {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.divider-text span {
+    background-color: #ffffff;
+    padding: 0 0.5rem;
+    color: #94a3b8;
+    /* slate-400 */
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.social-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem;
+    background-color: transparent;
+    border: 1px solid #e2e8f0;
+    /* slate-200 */
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: #0f172a;
+}
+
+.social-btn:hover {
+    background-color: #f8fafc;
+    /* slate-50 */
+}
+
+.social-btn span:not(.social-icon) {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.social-icon-img {
+    width: 20px;
+    height: 20px;
+}
+
+.social-icon {
+    font-size: 20px;
+    color: #0f172a;
+}
+
+/* Dark mode */
+:global(.dark) .divider-line {
+    border-color: #1e293b;
+    /* slate-800 */
+}
+
+:global(.dark) .divider-text span {
+    background-color: #0f1c23;
+    /* Or the card color */
+}
+
+:global(.dark) .social-btn {
+    border-color: #1e293b;
+    color: #f1f5f9;
+}
+
+:global(.dark) .social-btn:hover {
+    background-color: #1e293b;
+}
+
+:global(.dark) .social-icon {
+    color: #f1f5f9;
+}
