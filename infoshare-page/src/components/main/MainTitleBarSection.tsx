@@ -1,10 +1,10 @@
 import React from 'react';
-import '../../styles/Main/TitleBarSection.css';
-import { TITLE_BAR } from '../../constants/TitleBar';
+import '../../styles/Main/MainTitleBarSection.css';
+import { TITLE_BAR } from '../../constants/Texts';
 import titleBgImage from '../../assets/backgroundImages/title-bar-bg.png';
 import { SearchBar } from '../common/SearchBar';
 
-export const TitleBarSection: React.FC = () => {
+export const MainTitleBarSection: React.FC = () => {
     return (
         <section className="title-bar-section">
             <div className="title-bar-bg-wrapper">

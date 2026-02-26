@@ -1,10 +1,10 @@
 import React from 'react';
-import '../../styles/Main/LatestPosts.css';
-import { LATEST_POSTS } from '../../constants/MainText';
+import '../../styles/main/MainLatestPosts.css';
+import { LATEST_POSTS } from '../../constants/Texts';
 import { PostContentList } from '../common/PostContentList';
 import { MAIN_TEXT_TEST } from '../../tests/Mainpagedata';
 
-export const LatestPosts: React.FC = () => {
+export const MainLatestPosts: React.FC = () => {
     return (
         <div className="latest-posts-container">
             <div className="latest-posts-header">

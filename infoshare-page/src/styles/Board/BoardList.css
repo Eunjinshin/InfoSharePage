@@ -1,0 +1,178 @@
+/* BoardList.css */
+/* 게시글 목록 테이블 스타일 */
+
+.board-list-container {
+    overflow: hidden;
+    border-radius: 0.75rem;
+    /* rounded-xl */
+    border: 1px solid var(--slate-200, #e2e8f0);
+    background-color: #ffffff;
+    /* bg-white */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    /* shadow-sm */
+}
+
+.board-list-wrapper {
+    overflow-x: auto;
+}
+
+.board-table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+/* 테이블 헤더 */
+.board-table-head {
+    background-color: var(--slate-50, #f8fafc);
+    color: var(--slate-500, #64748b);
+    font-size: 0.75rem;
+    /* text-xs */
+    font-weight: 700;
+    /* font-bold */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    /* tracking-wider */
+}
+
+.board-table-head th {
+    padding: 1rem 1.5rem;
+    /* px-6 py-4 */
+}
+
+.th-topic {
+    text-align: left;
+}
+
+.th-author {
+    text-align: left;
+}
+
+.th-views {
+    text-align: center;
+}
+
+.th-date {
+    text-align: right;
+}
+
+/* 테이블 바디 */
+.board-table-body {
+    /* divide-y divide-slate-100 */
+}
+
+.board-row {
+    border-top: 1px solid var(--slate-100, #f1f5f9);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.board-row:hover {
+    /* hover:bg-primary/5 */
+    background-color: rgba(158, 223, 255, 0.05);
+}
+
+.board-row td {
+    padding: 1.25rem 1.5rem;
+    /* px-6 py-5 */
+}
+
+/* Topic Column */
+.board-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.board-title {
+    font-size: 1rem;
+    /* text-base */
+    font-weight: 700;
+    /* font-bold */
+    color: var(--slate-900, #0f172a);
+    transition: color 0.2s;
+}
+
+.board-row:hover .board-title {
+    color: var(--primary-color, #9edfff);
+}
+
+.board-meta {
+    font-size: 0.875rem;
+    /* text-sm */
+    color: var(--slate-500, #64748b);
+    margin-top: 0.125rem;
+}
+
+/* Author Column */
+.author-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    /* gap-3 */
+}
+
+.author-avatar {
+    height: 2rem;
+    /* h-8 */
+    width: 2rem;
+    /* w-8 */
+    border-radius: 9999px;
+    /* rounded-full */
+    background-color: var(--slate-200, #e2e8f0);
+    background-size: cover;
+    background-position: center;
+}
+
+.author-name {
+    font-size: 0.875rem;
+    /* text-sm */
+    font-weight: 500;
+    /* font-medium */
+    color: var(--slate-900, #0f172a);
+}
+
+/* Views Column */
+.td-views {
+    text-align: center;
+    font-size: 0.875rem;
+    /* text-sm */
+    font-weight: 500;
+    /* font-medium */
+    color: var(--slate-600, #475569);
+}
+
+/* Date Column */
+.td-date {
+    text-align: right;
+    font-size: 0.875rem;
+    /* text-sm */
+    color: var(--slate-500, #64748b);
+}
+
+/* Dark mode support */
+:root[class~="dark"] .topic-list-container {
+    border-color: var(--slate-800, #1e293b);
+    background-color: var(--slate-900, #0f172a);
+}
+
+:root[class~="dark"] .topic-table-head {
+    /* bg-slate-800/50 */
+    background-color: rgba(30, 41, 59, 0.5);
+    color: var(--slate-400, #94a3b8);
+}
+
+:root[class~="dark"] .topic-row {
+    border-color: var(--slate-800, #1e293b);
+}
+
+:root[class~="dark"] .topic-title {
+    color: var(--slate-100, #f1f5f9);
+}
+
+:root[class~="dark"] .author-name {
+    color: var(--slate-100, #f1f5f9);
+}
+
+:root[class~="dark"] .td-views {
+    color: var(--slate-400, #94a3b8);
+}

@@ -1,11 +1,12 @@
-import { SIDEBAR } from "../../constants/MainText";
+import { SIDEBAR } from "../../constants/Texts";
 import { MAIN_TEXT_TEST } from "../../tests/Mainpagedata";
 import { MaterialIcon } from "../../utils/MaterialIcon";
+import "../../styles/components/ContributorsList.css";
 
 export const ContributorsList = () => {
     return (
-        <div className="contributors-list-containe">
-            <h3 className="contributors-list-containe-title">
+        <div className="contributors-list-container">
+            <h3 className="contributors-list-container-title">
                 {SIDEBAR.CONTRIBUTORS_TITLE}
             </h3>
             <div className="contributors-list">

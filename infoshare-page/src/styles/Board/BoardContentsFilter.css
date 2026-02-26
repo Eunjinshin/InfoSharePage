@@ -1,0 +1,73 @@
+/* BoardFilter.css */
+/* 게시판 필터 버튼 및 검색창 스타일 */
+
+.board-filter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* gap-4 */
+    margin-bottom: 1.5rem;
+    /* mb-6 */
+}
+
+/* 데스크탑 뷰에 대한 미디어 쿼리 (md) */
+@media (min-width: 768px) {
+    .board-filter-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.board-filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    /* gap-2 */
+}
+
+/* 공통 버튼 스타일 */
+.board-filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* gap-2 */
+    padding: 0.5rem 1rem;
+    /* px-4 py-2 */
+    font-size: 0.875rem;
+    /* text-sm */
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+    outline: none;
+}
+
+/* 기본 상태 필터 버튼 (All Posts, Popular, Unanswered) */
+.board-filter-btn.default-btn {
+    background-color: #ffffff;
+    /* bg-white */
+    border: 1px solid var(--slate-200, #e2e8f0);
+    color: var(--slate-900, #0f172a);
+    font-weight: 500;
+}
+
+.board-filter-btn.default-btn:hover {
+    border-color: var(--primary-color, #9edfff);
+}
+
+/* 활성 상태 필터 버튼 (Latest) */
+.board-filter-btn.active-btn {
+    /* Tailwind bg-primary/20: #9edfff with 20% opacity = rgba(158, 223, 255, 0.2) */
+    background-color: rgba(158, 223, 255, 0.2);
+    border: 1px solid rgba(158, 223, 255, 0.3);
+    /* border-primary/30 */
+    color: var(--slate-900, #0f172a);
+    font-weight: 700;
+    /* font-bold */
+}
+
+.icon-small {
+    font-size: 0.875rem;
+    /* text-sm */
+}

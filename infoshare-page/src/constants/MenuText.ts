@@ -1,4 +1,4 @@
-import { CATEGORY } from "./Icons";
+import { CATEGORY_ICONS } from "./Icons";
 
 export const TITLE_TEXT = {
     TITLE: "InfoShare",
@@ -14,6 +14,11 @@ export const HEADER_TEXT = {
     ],
     login: [
         { text: 'About', href: '/about' }
+    ],
+    board: [
+        { text: 'Home', href: '/' },
+        { text: 'Categories', href: '/categories' },
+        { text: 'About', href: '/about' }
     ]
 };
 
@@ -25,10 +30,10 @@ export const FOOTER_TEXT = {
 
 export const CATEGORY_TEXT = {
     CATEGORIES: [
-        { icon: CATEGORY.TRENDING_UP, text: "Tips" },
-        { icon: CATEGORY.COMPUTER, text: "Tech" },
-        { icon: CATEGORY.NEWSPAPER, text: "News" },
-        { icon: CATEGORY.SCIENCE, text: "Science" },
-        { icon: CATEGORY.DESIGN_SERVICES, text: "Design" }
+        { icon: CATEGORY_ICONS.TRENDING_UP, text: "Tips" },
+        { icon: CATEGORY_ICONS.COMPUTER, text: "Tech" },
+        { icon: CATEGORY_ICONS.NEWSPAPER, text: "News" },
+        { icon: CATEGORY_ICONS.SCIENCE, text: "Science" },
+        { icon: CATEGORY_ICONS.DESIGN_SERVICES, text: "Design" }
     ]
 };

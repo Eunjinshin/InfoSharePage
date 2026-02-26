@@ -1,0 +1,58 @@
+/* DetailPage.css */
+
+.detail-page-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.detail-content-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 840px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+    .detail-content-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.detail-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+}
+
+.detail-breadcrumb-link {
+    color: var(--slate-500, #64748b);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.detail-breadcrumb-link:hover {
+    color: var(--primary-color, #9edfff);
+}
+
+.detail-breadcrumb-separator {
+    color: var(--slate-400, #94a3b8);
+    font-size: 14px;
+}
+
+.detail-breadcrumb-current {
+    color: var(--slate-900, #0f172a);
+    font-weight: 500;
+}
+
+:root[class~="dark"] .detail-breadcrumb-current {
+    color: var(--slate-100, #f1f5f9);
+}

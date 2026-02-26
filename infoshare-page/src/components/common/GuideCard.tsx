@@ -1,4 +1,4 @@
-import { GUIDE } from "../../constants/MainText";
+import { GUIDE } from "../../constants/Texts";
 import { MaterialIcon } from "../../utils/MaterialIcon";
 import "../../styles/components/GuideCard.css";
 

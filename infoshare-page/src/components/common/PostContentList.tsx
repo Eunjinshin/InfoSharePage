@@ -1,5 +1,6 @@
-import { MAIN_TEXT } from "../../constants/MainText";
+import { MAIN_TEXT } from "../../constants/Texts";
 import { MaterialIcon } from "../../utils/MaterialIcon";
+import "../../styles/main/MainLatestPosts.css";
 
 export interface PostList {
     avatar: string;

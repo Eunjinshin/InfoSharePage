@@ -1,6 +1,6 @@
 import React from 'react';
-import '../../styles/footerHeader/Footer.css';
-import { FOOTER_TEXT } from '../../constants/MenuText';
+import '../styles/pages/Footer.css';
+import { FOOTER_TEXT } from '../constants/MenuText';
 
 export const Footer: React.FC = () => {
     return (

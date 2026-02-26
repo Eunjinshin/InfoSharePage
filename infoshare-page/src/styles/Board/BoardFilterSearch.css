@@ -1,0 +1,95 @@
+/* 우측 검색 영역 래퍼 */
+.board-filter-search-wrapper {
+    display: flex;
+    align-items: stretch;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .board-filter-search-wrapper {
+        width: auto;
+    }
+}
+
+.board-filter-search {
+    position: relative;
+    flex: 1;
+}
+
+@media (min-width: 768px) {
+    .board-filter-search {
+        min-width: 16rem;
+        /* 입력창의 최소 폭을 유지 */
+    }
+}
+
+/* 검색 버튼 커스텀 (Button 컴포넌트 덮어쓰기) */
+.board-filter-search-btn {
+    white-space: nowrap;
+    height: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.board-filter-search-icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 0.75rem;
+    /* pl-3 */
+    pointer-events: none;
+}
+
+.board-filter-search-icon .material-symbols-outlined {
+    color: var(--slate-400, #94a3b8);
+    font-size: 1.25rem;
+    /* text-xl */
+}
+
+.board-filter-search-input {
+    display: block;
+    width: 100%;
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    border: 1px solid var(--slate-200, #e2e8f0);
+    background-color: #ffffff;
+    padding: 0.5rem 0.75rem 0.5rem 2.5rem;
+    /* py-2 pr-3 pl-10 */
+    font-size: 0.875rem;
+    /* text-sm */
+    color: var(--slate-900, #0f172a);
+    transition: box-shadow 0.2s, border-color 0.2s;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.board-filter-search-input:focus {
+    /* focus:ring-primary focus:ring-2 */
+    box-shadow: 0 0 0 2px var(--primary-color, #9edfff);
+    border-color: transparent;
+}
+
+.board-filter-search-input::placeholder {
+    color: var(--slate-500, #64748b);
+}
+
+/* Dark mode support */
+:root[class~="dark"] .board-filter-btn.default-btn {
+    background-color: var(--slate-800, #1e293b);
+    border-color: var(--slate-700, #334155);
+    color: var(--slate-100, #f1f5f9);
+}
+
+:root[class~="dark"] .board-filter-btn.active-btn {
+    color: var(--slate-100, #f1f5f9);
+}
+
+:root[class~="dark"] .board-filter-search-input {
+    background-color: var(--slate-800, #1e293b);
+    border-color: var(--slate-700, #334155);
+    color: var(--slate-100, #f1f5f9);
+}

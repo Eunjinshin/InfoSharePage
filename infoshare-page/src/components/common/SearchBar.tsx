@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { MaterialIcon } from "../../utils/MaterialIcon";
-import { TITLE_BAR } from "../../constants/TitleBar";
+import { TITLE_BAR } from "../../constants/Texts";
 import { Button } from "../common/Button";
 import '../../styles/components/SearchBar.css';
 

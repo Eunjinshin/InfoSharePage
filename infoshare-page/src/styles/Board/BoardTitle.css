@@ -1,0 +1,81 @@
+/* BoardHeader.css */
+/* 게시판 상단 브레드크럼 및 타이틀 관련 스타일 */
+
+.board-header {
+    margin-bottom: 2rem;
+    /* mb-8 (32px) */
+}
+
+/* Breadcrumbs (네비게이션 경로) */
+.board-breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* gap-2 */
+    margin-bottom: 1.5rem;
+    /* mb-6 */
+    font-size: 0.875rem;
+    /* text-sm */
+    color: var(--slate-500, #64748b);
+}
+
+.breadcrumb-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumb-link:hover {
+    color: var(--primary-color, #9edfff);
+}
+
+.breadcrumb-separator {
+    font-size: 0.75rem;
+    /* text-xs */
+}
+
+.breadcrumb-current {
+    color: var(--slate-900, #0f172a);
+    font-weight: 500;
+}
+
+/* Title Section (제목 및 설명) */
+.board-title-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* mb-2 for title */
+}
+
+.board-title {
+    font-size: 2.25rem;
+    /* text-4xl */
+    line-height: 2.5rem;
+    font-weight: 900;
+    /* font-black */
+    letter-spacing: -0.025em;
+    /* tracking-tight */
+    color: var(--slate-900, #0f172a);
+    margin: 0;
+}
+
+.board-description {
+    font-size: 1.125rem;
+    /* text-lg */
+    color: var(--slate-600, #475569);
+    margin: 0;
+}
+
+/* Dark mode support (if wrapping class exists) */
+:root[class~="dark"] .breadcrumb-link {
+    color: var(--slate-400, #94a3b8);
+}
+
+:root[class~="dark"] .breadcrumb-current,
+:root[class~="dark"] .board-title {
+    color: var(--slate-100, #f1f5f9);
+}
+
+:root[class~="dark"] .board-description {
+    color: var(--slate-400, #94a3b8);
+}

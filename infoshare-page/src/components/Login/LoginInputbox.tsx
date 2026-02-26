@@ -7,13 +7,13 @@ import { LOGIN_TEXT } from '../../constants/LoginText';
  * InputBox 컴포넌트가 부모 컴포넌트(LoginForm)로부터 전달받을 수 있는 속성(Props)들을 정의합니다.
  * 기본적인 <input> 태그의 모든 속성을 사용할 수 있도록 React.InputHTMLAttributes를 확장했습니다.
  */
-interface InputBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface LoginInputBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
     icon: string;
     showForgotPassword?: boolean;
     isPassword?: boolean;
 }
 
-export const InputBox: React.FC<InputBoxProps> = ({
+export const LoginInputbox: React.FC<LoginInputBoxProps> = ({
     icon,
     showForgotPassword = false,
     isPassword = false,

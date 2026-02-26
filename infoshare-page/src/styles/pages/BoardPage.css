@@ -1,0 +1,47 @@
+/* BoardPage.css */
+
+.board-page-layout {
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    overflow-x: hidden;
+    background-color: #f5f7f8;
+}
+
+:global(.dark) .board-page-layout {
+    background-color: #0f1c23;
+}
+
+.board-page-main {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 80rem;
+    /* max-w-7xl */
+    padding: 2rem 1rem 5rem 1rem;
+    /* Increased bottom padding to avoid overlapping the Write Post button */
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0%;
+}
+
+@media (min-width: 640px) {
+
+    /* sm */
+    .board-page-main {
+        padding-left: 1.5rem;
+        /* sm:px-6 */
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    /* lg */
+    .board-page-main {
+        padding-left: 2rem;
+        /* lg:px-8 */
+        padding-right: 2rem;
+    }
+}

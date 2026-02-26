@@ -1,0 +1,122 @@
+/* Pagination.css */
+/* 게시글 목록 하단 페이지네이션 컴포넌트 스타일 */
+
+.pagination-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+    /* mt-8 */
+    padding-top: 1.5rem;
+    /* pt-6 */
+    border-top: 1px solid var(--slate-200, #e2e8f0);
+}
+
+.pagination-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* gap-2 */
+}
+
+.pagination-info p {
+    font-size: 0.875rem;
+    /* text-sm */
+    color: var(--slate-600, #475569);
+    margin: 0;
+}
+
+.pagination-info span {
+    font-weight: 700;
+    /* font-bold */
+}
+
+.pagination-controls {
+    display: flex;
+    gap: 0.25rem;
+    /* gap-1 */
+}
+
+/* 공통 버튼 크기 및 모양 */
+.page-btn {
+    display: flex;
+    height: 2.25rem;
+    /* h-9 */
+    width: 2.25rem;
+    /* w-9 */
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    font-size: 0.875rem;
+    /* 폰트 크기는 HTML 기준에 맞춤 */
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    outline: none;
+}
+
+/* 꺾쇠 아이콘 버튼 & 숫자 기본 버튼 */
+.page-btn.nav-btn,
+.page-btn.default-btn {
+    background-color: #ffffff;
+    /* bg-white */
+    border: 1px solid var(--slate-200, #e2e8f0);
+    color: var(--slate-900, #0f172a);
+}
+
+.page-btn.nav-btn:hover,
+.page-btn.default-btn:hover {
+    background-color: var(--slate-50, #f8fafc);
+}
+
+.page-btn.nav-btn .material-symbols-outlined {
+    font-size: 0.875rem;
+    /* text-sm */
+}
+
+/* 비활성화된 버튼 스타일 */
+.page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* 활성 페이지 버튼 */
+.page-btn.active-btn {
+    background-color: var(--primary-color, #9edfff);
+    color: var(--slate-900, #0f172a);
+    font-weight: 700;
+    /* font-bold */
+    border: none;
+}
+
+/* 생략 부호 (...) */
+.page-dots {
+    display: flex;
+    height: 2.25rem;
+    width: 2.25rem;
+    align-items: center;
+    justify-content: center;
+    color: var(--slate-400, #94a3b8);
+}
+
+/* Dark mode support */
+:root[class~="dark"] .pagination-container {
+    border-color: var(--slate-800, #1e293b);
+}
+
+:root[class~="dark"] .pagination-info p {
+    color: var(--slate-400, #94a3b8);
+}
+
+:root[class~="dark"] .page-btn.nav-btn,
+:root[class~="dark"] .page-btn.default-btn {
+    background-color: var(--slate-800, #1e293b);
+    border-color: var(--slate-700, #334155);
+    color: var(--slate-100, #f1f5f9);
+}
+
+:root[class~="dark"] .page-btn.nav-btn:hover,
+:root[class~="dark"] .page-btn.default-btn:hover {
+    background-color: var(--slate-900, #0f172a);
+}

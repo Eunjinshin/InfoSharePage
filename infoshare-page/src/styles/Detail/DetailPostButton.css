@@ -1,0 +1,75 @@
+.detail-post-stats {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--slate-500, #64748b);
+    font-size: 0.875rem;
+}
+
+.detail-post-stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.detail-post-stat-item .material-symbols-outlined {
+    font-size: 18px;
+}
+
+.detail-post-actions {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--slate-100, #f1f5f9);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.detail-action-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    background-color: var(--slate-100, #f1f5f9);
+    color: var(--slate-700, #334155);
+    font-weight: 600;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.detail-action-btn:hover {
+    color: var(--primary-color, #9edfff);
+    background-color: rgba(158, 223, 255, 0.2);
+}
+
+.detail-action-btn:focus {
+    outline: 2px solid var(--primary-color, #9edfff);
+    background-color: rgba(158, 223, 255, 0.3);
+}
+
+.detail-action-btn:active {
+    background-color: rgba(158, 223, 255, 0.4);
+    outline: 2px solid rgba(158, 223, 255, 0.8);
+}
+
+.detail-action-btn.like-btn:hover {
+    color: #ef4444;
+    /* red-500 */
+    background-color: #fef2f2;
+    /* red-50 */
+}
+
+.detail-action-btn.like-btn:focus {
+    outline: 2px solid #ef4444;
+    background-color: #fee2e2;
+}
+
+.detail-action-btn.like-btn:active {
+    background-color: #fecaca;
+    outline: 2px solid #f87171;
+}

@@ -1,10 +1,10 @@
 import React from 'react';
-import '../../styles/Main/PopularPosts.css';
+import '../../styles/main/MainPopularPosts.css';
 import { PostContentCards } from '../common/PostContentCards';
-import { POPULAR_POSTS } from '../../constants/MainText';
+import { POPULAR_POSTS } from '../../constants/Texts';
 import { MAIN_TEXT_TEST } from '../../tests/Mainpagedata';
 
-export const PopularPosts: React.FC = () => {
+export const MainPopularPosts: React.FC = () => {
     return (
         <div className="popular-posts-container">
             <div className="popular-posts-header">
