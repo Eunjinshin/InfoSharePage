@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.infoshare.repository.PostMapper">
+
+    <insert id="insertPost" parameterType="Post">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            SELECT COALESCE(MIN(t.id + 1), 1)
+            FROM (SELECT 0 AS id UNION ALL SELECT id FROM posts) t
+            LEFT JOIN posts t2 ON t.id + 1 = t2.id
+            WHERE t2.id IS NULL
+        </selectKey>
+        INSERT INTO posts (id, author, title, content, created_at)
+        VALUES (#{id}, #{author}, #{title}, #{content}, NOW())
+    </insert>
+
+    <insert id="insertPostFiles" parameterType="java.util.List">
+        INSERT INTO post_files (post_id, original_file_name, stored_file_name, file_path)
+        VALUES
+        <foreach collection="list" item="file" separator=",">
+            (#{file.postId}, #{file.originalFileName}, #{file.storedFileName}, #{file.filePath})
+        </foreach>
+    </insert>
+
+    <insert id="insertPostTags" parameterType="java.util.List">
+        INSERT INTO post_tags (post_id, tag)
+        VALUES
+        <foreach collection="list" item="tag" separator=",">
+            (#{tag.postId}, #{tag.tag})
+        </foreach>
+    </insert>
+
+</mapper>
