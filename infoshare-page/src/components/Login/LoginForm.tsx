@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../styles/components/LoginForm.css';
 import { LOGIN_TEXT, LOGIN_ICON } from '../../constants/LoginText';
-import { InputBox } from '../common/Inputbox';
 import { Button } from '../common/Button';
+import { LoginInputbox } from './LoginInputbox';
 
 interface LoginFormProps {
     onLogin?: () => void;
@@ -21,13 +21,13 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
 
     return (
         <form className="login-form" onSubmit={handleSubmit}>
-            <InputBox
+            <LoginInputbox
                 icon={LOGIN_ICON.EMAIL}
                 type="email"
                 placeholder={LOGIN_TEXT.PLACEHOLDER_EMAIL}
             />
 
-            <InputBox
+            <LoginInputbox
                 icon={LOGIN_ICON.PASSWORD}
                 type="password"
                 placeholder={LOGIN_TEXT.PLACEHOLDER_PASSWORD}

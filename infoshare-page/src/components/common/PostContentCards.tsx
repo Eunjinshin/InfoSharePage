@@ -1,7 +1,7 @@
 import React from "react";
 import { MaterialIcon } from "../../utils/MaterialIcon";
-import { MAIN_TEXT } from "../../constants/MainText";
-
+import { MAIN_TEXT } from "../../constants/Texts";
+import "../../styles/main/MainPopularPosts.css";
 
 export interface PostCards {
     image: string;

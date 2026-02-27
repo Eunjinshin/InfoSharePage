@@ -1,0 +1,26 @@
+/* DetailPage.css */
+
+.detail-page-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.detail-content-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 840px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+    .detail-content-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

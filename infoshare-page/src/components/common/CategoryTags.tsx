@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/Main/CategoryTags.css';
+import '../../styles/components/CategoryTags.css';
 import { MaterialIcon } from '../../utils/MaterialIcon';
 import { CATEGORY_TEXT } from '../../constants/MenuText';
 

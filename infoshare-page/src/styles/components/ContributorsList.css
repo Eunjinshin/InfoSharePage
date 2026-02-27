@@ -1,0 +1,86 @@
+.contributors-list-container {
+    border-radius: 0.75rem;
+    /* rounded-xl */
+    background-color: white;
+    /* bg-white */
+    padding: 1.5rem;
+    /* p-6 */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    /* shadow-sm */
+    border: 1px solid #f1f5f9;
+    /* border-slate-100 */
+}
+
+.contributors-list-container-title {
+    margin: 0 0 1rem 0;
+    /* mb-4 */
+    font-size: 1.125rem;
+    /* text-lg */
+    font-weight: 700;
+    /* font-bold */
+}
+
+.contributors-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* gap-4 */
+}
+
+.contributors-list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.contributors-list-info-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    /* gap-3 */
+}
+
+.contributors-list-avatar {
+    height: 2.5rem;
+    /* h-10 */
+    width: 2.5rem;
+    /* w-10 */
+    overflow: hidden;
+    /* overflow-hidden */
+    border-radius: 9999px;
+    /* rounded-full */
+    background-color: #f1f5f9;
+    /* bg-slate-100 */
+}
+
+.contributors-list-avatar img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.contributors-list-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.contributors-list-name {
+    margin: 0;
+    font-size: 0.875rem;
+    /* text-sm */
+    font-weight: 700;
+    /* font-bold */
+}
+
+.contributors-list-points {
+    margin: 0;
+    font-size: 0.75rem;
+    /* text-xs */
+    color: #64748b;
+    /* text-slate-500 */
+}
+
+.contributors-list-icon {
+    color: #9edfff;
+    /* text-primary */
+}

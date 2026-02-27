@@ -1,0 +1,14 @@
+.sidebar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    /* space-y-8 */
+}
+
+/* Dark mode support */
+:global(.dark) .sidebar-card {
+    background-color: #1e293b;
+    /* bg-slate-800 */
+    border-color: #334155;
+    /* border-slate-700 */
+}

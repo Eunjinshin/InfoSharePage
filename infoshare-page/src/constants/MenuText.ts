@@ -1,4 +1,4 @@
-import { CATEGORY } from "./Icons";
+import { CATEGORY_ICONS } from "./Icons";
 
 export const TITLE_TEXT = {
     TITLE: "InfoShare",
@@ -8,12 +8,17 @@ export const TITLE_TEXT = {
 
 export const HEADER_TEXT = {
     main: [
-        { text: 'Explore', href: '/explore' },
-        { text: 'Community', href: '/community' },
-        { text: 'About', href: '/about' }
+        { text: '홈', href: '/' },
+        { text: '카테고리', href: '/categories' },
+        { text: '소개', href: '/about' }
     ],
     login: [
-        { text: 'About', href: '/about' }
+        { text: '소개', href: '/about' }
+    ],
+    board: [
+        { text: '홈', href: '/' },
+        { text: '카테고리', href: '/categories' },
+        { text: '소개', href: '/about' }
     ]
 };
 
@@ -25,10 +30,10 @@ export const FOOTER_TEXT = {
 
 export const CATEGORY_TEXT = {
     CATEGORIES: [
-        { icon: CATEGORY.TRENDING_UP, text: "Tips" },
-        { icon: CATEGORY.COMPUTER, text: "Tech" },
-        { icon: CATEGORY.NEWSPAPER, text: "News" },
-        { icon: CATEGORY.SCIENCE, text: "Science" },
-        { icon: CATEGORY.DESIGN_SERVICES, text: "Design" }
+        { icon: CATEGORY_ICONS.TRENDING_UP, text: "Tips" },
+        { icon: CATEGORY_ICONS.COMPUTER, text: "Tech" },
+        { icon: CATEGORY_ICONS.NEWSPAPER, text: "News" },
+        { icon: CATEGORY_ICONS.SCIENCE, text: "Science" },
+        { icon: CATEGORY_ICONS.DESIGN_SERVICES, text: "Design" }
     ]
 };

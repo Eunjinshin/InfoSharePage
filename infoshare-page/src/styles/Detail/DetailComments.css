@@ -1,0 +1,22 @@
+/* Load More Button */
+.detail-comment-load-more {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.detail-comment-load-btn {
+    color: var(--primary-color, #9edfff);
+    font-weight: 700;
+    font-size: 0.875rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.detail-comment-load-btn:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+}

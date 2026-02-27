@@ -47,16 +47,14 @@ export const MAIN_TEXT_TEST = {
             }
         ]
     },
+
     SIDEBAR: {
-        STATS_TITLE: "Community Stats",
         STATS: [
-            { value: "12k+", label: "Members" },
-            { value: "450+", label: "Communities" },
-            { value: "8.5k", label: "Daily Posts" },
-            { value: "1.2M", label: "Votes" }
+            "12k+",
+            "450+",
+            "8.5k",
+            "1.2M"
         ],
-        JOIN_BTN: "Join Community",
-        CONTRIBUTORS_TITLE: "Top Contributors",
         CONTRIBUTORS: [
             {
                 avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuBFTAkqGePDTpw_yyQF0zLcoVBw2NVhp9dXfkkUY0d2qOxlxfP-rNw7Veq4XTwh8kVtMLqj1W8MEbqJkz1RR_EFTwTf15brmR3VK0FAr-_MoOKM9C7RDKUoVHlvUxUhxCcsZeen4IkheG1_YAegp871cg9BPxiE1lGgGc83KKNNtZAgFA4s85whqWWxZlpdimjgqWopZuCIhvMNTQuWbm7YvUw_dkLvmsXZxHhxX03tNOmxrJHYfqOjTSj4ckZ1GKCNSR4nU0st3h8",
