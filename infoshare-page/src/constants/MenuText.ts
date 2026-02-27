@@ -8,17 +8,17 @@ export const TITLE_TEXT = {
 
 export const HEADER_TEXT = {
     main: [
-        { text: 'Explore', href: '/explore' },
-        { text: 'Community', href: '/community' },
-        { text: 'About', href: '/about' }
+        { text: '홈', href: '/' },
+        { text: '카테고리', href: '/categories' },
+        { text: '소개', href: '/about' }
     ],
     login: [
-        { text: 'About', href: '/about' }
+        { text: '소개', href: '/about' }
     ],
     board: [
-        { text: 'Home', href: '/' },
-        { text: 'Categories', href: '/categories' },
-        { text: 'About', href: '/about' }
+        { text: '홈', href: '/' },
+        { text: '카테고리', href: '/categories' },
+        { text: '소개', href: '/about' }
     ]
 };
 

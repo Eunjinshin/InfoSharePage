@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../styles/Board/BoardTitle.css';
-import { BOARD_INFO } from '../../constants/Tag';
-import { BOARD } from '../../constants/Texts';
-import { CHEVRON_ICONS } from '../../constants/Icons';
+import { getCategoryInfo } from '../../constants/Tag';
+import { BREADCRUMB_NAV } from '../../constants/Texts';
+import { BreadcrumbNavigation } from '../common/BreadcrumbNavigation';
 
 
 /**
@@ -12,39 +12,26 @@ import { CHEVRON_ICONS } from '../../constants/Icons';
 
 
 interface BoardTitleProps {
-    tag?: string;
+    category: string;
 }
 
-export const BoardTitle: React.FC<BoardTitleProps> = ({ tag = "General Discussion" }) => {
-    // tag에 해당하는 정보가 없을 경우 기본값으로 처리
-    const info = BOARD_INFO[tag] || BOARD_INFO["General Discussion"];
+export const BoardTitle: React.FC<BoardTitleProps> = ({ category }) => {
+    // tag에 해당하는 정보가 없을 경우 기본값으로 처리된 정보를 가져옵니다
+    const CategoryInfo = getCategoryInfo(category);
 
     return (
         <div className="board-header">
-            <nav className="board-breadcrumbs">
-                <a href="/" className="breadcrumb-link">
-                    {BOARD.HOME}
-                </a>
-                <span className="material-symbols-outlined breadcrumb-separator">
-                    {CHEVRON_ICONS.RIGHT}
-                </span>
-                <a href="#" className="breadcrumb-link">
-                    {BOARD.CATEGORIES}
-                </a>
-                <span className="material-symbols-outlined breadcrumb-separator">
-                    {CHEVRON_ICONS.RIGHT}
-                </span>
-                <span className="breadcrumb-current">
-                    {info.title}
-                </span>
-            </nav>
+            <BreadcrumbNavigation paths={[
+                { name: BREADCRUMB_NAV.CATEGORIES, url: '/board' },
+                { name: CategoryInfo.title }
+            ]} />
 
             <div className="board-title-section">
                 <h1 className="board-title">
-                    {info.title}
+                    {CategoryInfo.title}
                 </h1>
                 <p className="board-description">
-                    {info.description}
+                    {CategoryInfo.description}
                 </p>
             </div>
 

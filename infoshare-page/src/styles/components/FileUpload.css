@@ -1,0 +1,161 @@
+.write-post-upload-area {
+    border: 2px dashed var(--slate-200, #e2e8f0);
+    border-radius: 0.75rem;
+    /* rounded-xl */
+    padding: 2rem;
+    /* p-8 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--slate-50, #f8fafc);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.write-post-upload-area:hover {
+    background-color: var(--slate-100, #f1f5f9);
+}
+
+:global(.dark) .write-post-upload-area {
+    border-color: var(--slate-700, #334155);
+    background-color: rgba(30, 41, 59, 0.5);
+    /* bg-slate-800/50 */
+}
+
+:global(.dark) .write-post-upload-area:hover {
+    background-color: var(--slate-800, #1e293b);
+}
+
+.write-post-upload-icon-wrapper {
+    width: 3.5rem;
+    /* size-14 */
+    height: 3.5rem;
+    background-color: white;
+    border-radius: 9999px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    /* mb-4 */
+}
+
+:global(.dark) .write-post-upload-icon-wrapper {
+    background-color: var(--slate-700, #334155);
+}
+
+.write-post-upload-icon {
+    color: var(--primary-color, #9edfff);
+    font-size: 1.875rem !important;
+    /* text-3xl */
+}
+
+.write-post-upload-text {
+    color: var(--slate-900, #0f172a);
+    font-weight: 600;
+    /* font-semibold */
+    text-align: center;
+    margin: 0;
+}
+
+:global(.dark) .write-post-upload-text {
+    color: var(--slate-100, #f1f5f9);
+}
+
+.write-post-upload-subtext {
+    color: var(--slate-500, #64748b);
+    font-size: 0.875rem;
+    /* text-sm */
+    margin: 0.25rem 0 0 0;
+    /* mt-1 */
+}
+
+:global(.dark) .write-post-upload-subtext {
+    color: var(--slate-400, #94a3b8);
+}
+
+/* 드래그 앤 드롭 중일 때의 스타일 */
+.write-post-upload-area.dragging {
+    border-color: var(--primary-color, #9edfff);
+    background-color: rgba(158, 223, 255, 0.1);
+}
+
+:global(.dark) .write-post-upload-area.dragging {
+    border-color: var(--primary-color, #9edfff);
+    background-color: rgba(158, 223, 255, 0.1);
+}
+
+/* 첨부된 파일 목록 컨테이너 */
+.write-post-file-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* 개별 파일 아이템 */
+.write-post-file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background-color: var(--slate-50, #f8fafc);
+    border: 1px solid var(--slate-200, #e2e8f0);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+}
+
+:global(.dark) .write-post-file-item {
+    background-color: var(--slate-800, #1e293b);
+    border-color: var(--slate-700, #334155);
+}
+
+.file-name {
+    color: var(--slate-900, #0f172a);
+    font-weight: 500;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 0.5rem;
+}
+
+:global(.dark) .file-name {
+    color: var(--slate-100, #f1f5f9);
+}
+
+.file-size {
+    color: var(--slate-500, #64748b);
+    margin-right: 1rem;
+    white-space: nowrap;
+}
+
+:global(.dark) .file-size {
+    color: var(--slate-400, #94a3b8);
+}
+
+/* 삭제 버튼 */
+.file-remove-btn {
+    background: none;
+    border: none;
+    color: var(--slate-400, #94a3b8);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s;
+}
+
+.file-remove-btn:hover {
+    color: #ef4444;
+    /* red-500 */
+    background-color: #fee2e2;
+    /* red-50 */
+}
+
+:global(.dark) .file-remove-btn:hover {
+    background-color: rgba(239, 68, 68, 0.2);
+}

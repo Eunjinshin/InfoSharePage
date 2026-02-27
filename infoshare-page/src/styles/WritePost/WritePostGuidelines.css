@@ -1,0 +1,59 @@
+.write-post-guidelines-container {
+    margin-top: 2rem;
+    /* mt-8 */
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.5rem;
+    /* gap-6 */
+    white-space: pre-wrap;
+}
+
+@media (min-width: 768px) {
+    .write-post-guidelines-container {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.write-post-guideline-card {
+    padding: 1rem;
+    /* p-4 */
+    background-color: rgba(158, 223, 255, 0.1);
+    /* bg-primary/10 */
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    border: 1px solid rgba(158, 223, 255, 0.2);
+    /* border-primary/20 */
+}
+
+.write-post-guideline-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* gap-2 */
+    color: var(--slate-900, #0f172a);
+    font-weight: 700;
+    /* font-bold */
+    margin-bottom: 0.5rem;
+    /* mb-2 */
+}
+
+:global(.dark) .write-post-guideline-header {
+    color: var(--slate-100, #f1f5f9);
+}
+
+.write-post-guideline-icon {
+    color: var(--primary-color, #9edfff);
+    font-size: 1.25rem !important;
+    /* text-xl or default */
+}
+
+.write-post-guideline-desc {
+    font-size: 0.875rem;
+    /* text-sm */
+    color: var(--slate-600, #475569);
+    margin: 0;
+}
+
+:global(.dark) .write-post-guideline-desc {
+    color: var(--slate-400, #94a3b8);
+}

@@ -7,12 +7,16 @@ import React from 'react';
 import '../../styles/components/WritePostButton.css';
 import { WRITE_POST_BUTTON } from '../../constants/Texts';
 import { BOARD_ICONS } from '../../constants/Icons';
+import { useNavigate } from 'react-router-dom';
 
 export const WritePostButton = () => {
+    const navigate = useNavigate();
+
     return (
         <button
             className="write-post-btn"
             aria-label={WRITE_POST_BUTTON.WRITE_POST}
+            onClick={() => navigate('/write')}
         >
             <span className="material-symbols-outlined icon-edit">
                 {BOARD_ICONS.EDIT}

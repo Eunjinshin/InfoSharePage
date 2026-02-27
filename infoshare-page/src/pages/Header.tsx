@@ -38,7 +38,8 @@ export const Header: React.FC<HeaderProps> = ({ type = 'main' }) => {
                             </a>
                         ))}
                     </nav>
-                    <button className="header-signup-btn">
+                    <button className="header-signup-btn"
+                        onClick={() => window.location.href = '/login'}>
                         {TITLE_TEXT.SIGN}
                     </button>
                 </div>

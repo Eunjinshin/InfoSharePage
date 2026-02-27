@@ -5,6 +5,7 @@ import { MainPopularPosts } from '../components/main/MainPopularPosts';
 import { MainLatestPosts } from '../components/main/MainLatestPosts';
 import { Sidebar } from './Sidebar';
 import '../styles/pages/MainPage.css';
+import { WritePostButton } from '../components/common/WritePostButton';
 
 export const MainPage: React.FC = () => {
     return (
@@ -19,6 +20,7 @@ export const MainPage: React.FC = () => {
                 </div>
                 <Sidebar />
             </div>
+            <WritePostButton />
         </main>
     );
 };
