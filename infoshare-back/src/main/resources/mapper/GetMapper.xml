@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <mapper namespace="com.infoshare.repository.GetMapper">
+
+
+          <select id="getPosts" parameterType="com.infoshare.common.dto.PageRequestDto" resultType="Post">
+        SELECT id, author, title, content, category, created_at AS createdAt, edited_at AS editedAt,
+               view_count AS viewCount, like_count AS likeCount
+        FROM posts
+        <where>
+            <if test="category != null and category != ''">
+                AND category = #{category}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND (title LIKE CONCAT('%', #{keyword}, '%') OR content LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+        </where>
+        <choose>
+            <when test="sort == 'views'">
+                ORDER BY view_count DESC, id DESC
+            </when>
+            <when test="sort == 'likes'">
+                ORDER BY like_count DESC, id DESC
+            </when>
+            <otherwise>
+                ORDER BY id DESC
+            </otherwise>
+        </choose>
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <select id="countPosts" parameterType="com.infoshare.common.dto.PageRequestDto" resultType="long">
+        SELECT COUNT(id)
+        FROM posts
+        <where>
+            <if test="category != null and category != ''">
+                AND category = #{category}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND (title LIKE CONCAT('%', #{keyword}, '%') OR content LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+        </where>
+    </select>
+
+    </mapper>
