@@ -1,4 +1,4 @@
-package main.java.com.infoshare.domain;
+package com.infoshare.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

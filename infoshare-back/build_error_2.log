@@ -1,0 +1,268 @@
+﻿
+> Task :compileJava
+.\gradlew.bat : C:\Users\user\
+Desktop\04.Project_self\01.Inf
+omationSharePage\infoshare-bac
+k\src\main\java\com\infoshare\
+common\FileStore.java:3: error
+: package main.java.com.infosh
+are.dto.response does not exis
+t
+위치 줄:1 문자:1
++ .\gradlew.bat classes --cons
+ole=plain 2>&1 | Out-File -Enc
+oding utf8  ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
+    + CategoryInfo          : 
+    NotSpecified: (C:\Users\  
+  user\D... does not exist:   
+ String) [], RemoteExcepti    
+on
+    + FullyQualifiedErrorId : 
+    NativeCommandError
+ 
+import main.java.com.infoshare
+.dto.response.UploadResult;
+                              
+             ^
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\common\FileStore
+.java:30: error: cannot find s
+ymbol
+    public List<UploadResult> 
+storeFiles(List<MultipartFile>
+ multipartFiles) {
+                ^
+  symbol:   class UploadResult
+  location: class FileStore
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\common\FileStore
+.java:50: error: cannot find s
+ymbol
+    private UploadResult store
+File(MultipartFile multipartFi
+le) {
+            ^
+  symbol:   class UploadResult
+  location: class FileStore
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\service\PostServ
+ice.java:5: error: package mai
+n.java.com.infoshare.domain do
+es not exist
+import main.java.com.infoshare
+.domain.PostFile;
+                              
+       ^
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\service\PostServ
+ice.java:6: error: package mai
+n.java.com.infoshare.dto.reque
+st does not exist
+import main.java.com.infoshare
+.dto.request.PostCreateRequest
+;
+                              
+            ^
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\service\PostServ
+ice.java:7: error: package mai
+n.java.com.infoshare.dto.respo
+nse does not exist
+import main.java.com.infoshare
+.dto.response.PostResponse;
+                              
+             ^
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\service\PostServ
+ice.java:8: error: package mai
+n.java.com.infoshare.dto.respo
+nse does not exist
+import main.java.com.infoshare
+.dto.response.PostFileResponse
+;
+                              
+             ^
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\service\PostServ
+ice.java:9: error: package mai
+n.java.com.infoshare.dto.respo
+nse does not exist
+import main.java.com.infoshare
+.dto.response.UploadResult;
+                              
+             ^
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\service\PostServ
+ice.java:10: error: package ma
+in.java.com.infoshare.reposito
+ry does not exist
+import main.java.com.infoshare
+.repository.PostMapper;
+                              
+           ^
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\service\PostServ
+ice.java:11: error: package ma
+in.java.com.infoshare.common d
+oes not exist
+import main.java.com.infoshare
+.common.LogInfo;
+                              
+       ^
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\service\PostServ
+ice.java:12: error: package ma
+in.java.com.infoshare.common d
+oes not exist
+import main.java.com.infoshare
+.common.LogMessage;
+                              
+       ^
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\service\PostServ
+ice.java:13: error: package ma
+in.java.com.infoshare.common d
+oes not exist
+import main.java.com.infoshare
+.common.FileStore;
+                              
+       ^
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\service\PostServ
+ice.java:27: error: cannot fin
+d symbol
+    private final PostMapper p
+ostMapper;
+                  ^
+  symbol:   class PostMapper
+  location: class PostService
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\service\PostServ
+ice.java:28: error: cannot fin
+d symbol
+    private final LogInfo logI
+nfo;
+                  ^
+  symbol:   class LogInfo
+  location: class PostService
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\service\PostServ
+ice.java:29: error: cannot fin
+d symbol
+    private final FileStore fi
+leStore;
+                  ^
+  symbol:   class FileStore
+  location: class PostService
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\service\PostServ
+ice.java:32: error: cannot fin
+d symbol
+    public PostResponse create
+Post(PostCreateRequest request
+) {
+                              
+     ^
+  symbol:   class PostCreateRe
+quest
+  location: class PostService
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\service\PostServ
+ice.java:32: error: cannot fin
+d symbol
+    public PostResponse create
+Post(PostCreateRequest request
+) {
+           ^
+  symbol:   class PostResponse
+  location: class PostService
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\service\PostServ
+ice.java:24: error: cannot fin
+d symbol
+@RequiredArgsConstructor
+^
+  symbol:   class PostMapper
+  location: class PostService
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\repository\PostM
+apper.java:5: error: package m
+ain.java.com.infoshare.domain 
+does not exist
+import main.java.com.infoshare
+.domain.PostFile;
+                              
+       ^
+C:\Users\user\Desktop\04.Proje
+ct_self\01.InfomationSharePage
+\infoshare-back\src\main\java\
+com\infoshare\repository\PostM
+apper.java:16: error: cannot f
+ind symbol
+    void insertPostFiles(List<
+PostFile> files);
+                              
+^
+  symbol:   class PostFile
+  location: interface PostMapp
+er
+20 errors
+
+> Task :compileJava FAILED
+
+FAILURE: Build failed with an 
+exception.
+
+* What went wrong:
+Execution failed for task ':co
+mpileJava'.
+> Compilation failed; see the 
+compiler error output for deta
+ils.
+
+* Try:
+> Run with --info option to ge
+t more log output.
+> Run with --scan to get full 
+insights.
+
+BUILD FAILED in 3s
+1 actionable task: 1 executed

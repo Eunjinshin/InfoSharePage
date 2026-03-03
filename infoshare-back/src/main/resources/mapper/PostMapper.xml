@@ -11,8 +11,8 @@
             LEFT JOIN posts t2 ON t.id + 1 = t2.id
             WHERE t2.id IS NULL
         </selectKey>
-        INSERT INTO posts (id, author, title, content, created_at)
-        VALUES (#{id}, #{author}, #{title}, #{content}, NOW())
+        INSERT INTO posts (id, author, title, content, category, created_at, view_count, like_count)
+        VALUES (#{id}, #{author}, #{title}, #{content}, #{category}, NOW(), 0, 0)
     </insert>
 
     <insert id="insertPostFiles" parameterType="java.util.List">
@@ -23,12 +23,73 @@
         </foreach>
     </insert>
 
+    <insert id="insertTags" parameterType="java.util.List">
+        INSERT IGNORE INTO tags (name)
+        VALUES
+        <foreach collection="list" item="tag" separator=",">
+            (#{tag})
+        </foreach>
+    </insert>
+
     <insert id="insertPostTags" parameterType="java.util.List">
-        INSERT INTO post_tags (post_id, tag)
+        INSERT INTO post_tags (post_id, tag_name)
         VALUES
         <foreach collection="list" item="tag" separator=",">
             (#{tag.postId}, #{tag.tag})
         </foreach>
     </insert>
+
+    <update id="updatePost" parameterType="Post">
+        UPDATE posts
+        SET title = #{title},
+            content = #{content},
+            category = #{category},
+            edited_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deletePostTags" parameterType="long">
+        DELETE FROM post_tags
+        WHERE post_id = #{postId}
+    </delete>
+
+    <select id="getPosts" parameterType="com.infoshare.common.dto.PageRequestDto" resultType="Post">
+        SELECT id, author, title, content, category, created_at AS createdAt, edited_at AS editedAt,
+               view_count AS viewCount, like_count AS likeCount
+        FROM posts
+        <where>
+            <if test="category != null and category != ''">
+                AND category = #{category}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND (title LIKE CONCAT('%', #{keyword}, '%') OR content LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+        </where>
+        <choose>
+            <when test="sort == 'views'">
+                ORDER BY view_count DESC, id DESC
+            </when>
+            <when test="sort == 'likes'">
+                ORDER BY like_count DESC, id DESC
+            </when>
+            <otherwise>
+                ORDER BY id DESC
+            </otherwise>
+        </choose>
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <select id="countPosts" parameterType="com.infoshare.common.dto.PageRequestDto" resultType="long">
+        SELECT COUNT(id)
+        FROM posts
+        <where>
+            <if test="category != null and category != ''">
+                AND category = #{category}
+            </if>
+            <if test="keyword != null and keyword != ''">
+                AND (title LIKE CONCAT('%', #{keyword}, '%') OR content LIKE CONCAT('%', #{keyword}, '%'))
+            </if>
+        </where>
+    </select>
 
 </mapper>

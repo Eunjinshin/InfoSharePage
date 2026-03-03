@@ -1,4 +1,4 @@
-package main.java.com.infoshare.common;
+package com.infoshare.common;
 
 public class LogMessage {
     // INFO Messages

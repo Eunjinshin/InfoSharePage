@@ -1,4 +1,4 @@
-package main.java.com.infoshare.dto.request;
+package com.infoshare.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +12,11 @@ public class PostCreateRequest {
     private String author;
     private String title;
     private String content;
+    private String category;
     private List<String> tags;
     private List<MultipartFile> files;
+
+    public void setTags(List<String> tags) {
+        this.tags = com.infoshare.common.TagParserUtil.parseTags(tags);
+    }
 }

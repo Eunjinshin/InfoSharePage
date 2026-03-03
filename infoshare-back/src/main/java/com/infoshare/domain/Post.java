@@ -1,4 +1,4 @@
-package main.java.com.infoshare.domain;
+package com.infoshare.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,5 +16,9 @@ public class Post {
     private String author;
     private String title;
     private String content;
+    private String category;
     private LocalDateTime createdAt;
+    private LocalDateTime editedAt;
+    private Integer viewCount;
+    private Integer likeCount;
 }

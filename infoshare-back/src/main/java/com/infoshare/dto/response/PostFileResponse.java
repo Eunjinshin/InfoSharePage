@@ -1,4 +1,4 @@
-package main.java.com.infoshare.dto.response;
+package com.infoshare.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

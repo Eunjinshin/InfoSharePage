@@ -1,125 +1,117 @@
-package main.java.com.infoshare.service;
+package com.infoshare.service;
 
 import com.infoshare.domain.Post;
 import com.infoshare.domain.PostTag;
-import main.java.com.infoshare.domain.PostFile;
-import main.java.com.infoshare.dto.request.PostCreateRequest;
-import main.java.com.infoshare.dto.response.PostResponse;
-import main.java.com.infoshare.dto.response.PostFileResponse;
-import main.java.com.infoshare.repository.PostMapper;
-import main.java.com.infoshare.common.LogInfo;
-import main.java.com.infoshare.common.LogMessage;
+import com.infoshare.domain.PostFile;
+import com.infoshare.dto.request.PostCreateRequest;
+import com.infoshare.dto.response.PostResponse;
+import com.infoshare.dto.response.PostFileResponse;
+import com.infoshare.dto.response.UploadResult;
+import com.infoshare.repository.PostMapper;
+import com.infoshare.common.FileStore;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PostService {
 
-    private final PostMapper postMapper;
-    private final LogInfo logInfo;
+        private final PostMapper postMapper;
+        private final FileStore fileStore;
 
-    @Value("${file.upload-dir:C:/infoshare_uploads/}")
-    private String uploadDir;
+        @Transactional
+        public PostResponse createPost(PostCreateRequest request) {
 
-    @Transactional
-    public PostResponse createPost(PostCreateRequest request) {
+                // 1. 게시글 엔티티 생성 (DB 저장하여 ID 확보)
+                Post post = Post.builder()
+                                .author(request.getAuthor() != null ? request.getAuthor() : "guest")
+                                .title(request.getTitle())
+                                .content(request.getContent())
+                                .category(request.getCategory())
+                                .build();
 
-        // 1. 게시글 엔티티 생성 (DB 저장하여 ID 확보)
-        Post post = Post.builder()
-                .author(request.getAuthor() != null ? request.getAuthor() : "guest")
-                .title(request.getTitle())
-                .content(request.getContent())
-                .build();
+                postMapper.insertPost(post);
 
-        postMapper.insertPost(post);
+                // 2. 파일 업로드 및 DB 저장 처리 (FileStore 컴포넌트 사용)
+                List<PostFile> postFiles = new ArrayList<>();
+                List<PostFileResponse> fileResponses = new ArrayList<>();
 
-        // 2. 파일 업로드 및 DB 저장 처리
-        List<PostFile> postFiles = new ArrayList<>();
-        List<PostFileResponse> fileResponses = new ArrayList<>();
+                List<UploadResult> uploadResults = fileStore.storeFiles(request.getFiles());
 
-        if (request.getFiles() != null && !request.getFiles().isEmpty()) {
-            Path uploadPath = Paths.get(uploadDir);
-            if (!Files.exists(uploadPath)) {
-                try {
-                    Files.createDirectories(uploadPath);
-                } catch (IOException e) {
-                    throw new RuntimeException(LogMessage.DIR_CREATE_FAILED, e);
+                for (UploadResult result : uploadResults) {
+                        postFiles.add(PostFile.builder()
+                                        .postId(post.getId())
+                                        .originalFileName(result.getOriginalFileName())
+                                        .storedFileName(result.getStoredFileName())
+                                        .filePath(result.getFilePath())
+                                        .build());
+
+                        fileResponses.add(PostFileResponse.builder()
+                                        .originalFileName(result.getOriginalFileName())
+                                        .url("/uploads/" + result.getStoredFileName()) // 추후 정적 리소스 매핑 시 사용할 URL
+                                        .build());
                 }
-            }
 
-            for (MultipartFile file : request.getFiles()) {
-                if (file.isEmpty())
-                    continue;
-
-                try {
-                    String originalFilename = file.getOriginalFilename();
-                    String extension = "";
-                    if (originalFilename != null && originalFilename.contains(".")) {
-                        extension = originalFilename.substring(originalFilename.lastIndexOf("."));
-                    }
-                    String storedFileName = UUID.randomUUID().toString() + extension;
-                    String filePath = uploadPath.resolve(storedFileName).toString();
-
-                    file.transferTo(new File(filePath));
-                    logInfo.info(LogMessage.FILE_SAVED, filePath);
-
-                    postFiles.add(PostFile.builder()
-                            .postId(post.getId())
-                            .originalFileName(originalFilename)
-                            .storedFileName(storedFileName)
-                            .filePath(filePath)
-                            .build());
-
-                    fileResponses.add(PostFileResponse.builder()
-                            .originalFileName(originalFilename)
-                            .url("/uploads/" + storedFileName) // 추후 정적 리소스 매핑 시 사용할 URL
-                            .build());
-
-                } catch (IOException e) {
-                    logInfo.error(LogMessage.FILE_STORE_FAILED, e.getMessage(), e);
-                    throw new RuntimeException("Failed to store file", e);
+                if (!postFiles.isEmpty()) {
+                        postMapper.insertPostFiles(postFiles);
                 }
-            }
+
+                // 3. 태그 저장
+                if (request.getTags() != null && !request.getTags().isEmpty()) {
+                        // 먼저 tags 테이블에 Insert Ignore
+                        postMapper.insertTags(request.getTags());
+
+                        List<PostTag> tags = request.getTags().stream()
+                                        .map(tag -> PostTag.builder()
+                                                        .postId(post.getId())
+                                                        .tag(tag)
+                                                        .build())
+                                        .collect(Collectors.toList());
+                        postMapper.insertPostTags(tags);
+                }
+
+                // 4. 응답 DTO 반환
+                return PostResponse.builder()
+                                .id(post.getId())
+                                .author(post.getAuthor())
+                                .title(post.getTitle())
+                                .content(post.getContent())
+                                .category(post.getCategory())
+                                .files(fileResponses)
+                                .tags(request.getTags())
+                                .createdAt(post.getCreatedAt())
+                                .viewCount(0)
+                                .likeCount(0)
+                                .build();
         }
 
-        if (!postFiles.isEmpty()) {
-            postMapper.insertPostFiles(postFiles);
-        }
+        @Transactional(readOnly = true)
+        public com.infoshare.common.dto.PageResponseDto<PostResponse> getPosts(
+                        com.infoshare.common.dto.PageRequestDto request) {
+                long totalElements = postMapper.countPosts(request);
+                List<Post> posts = postMapper.getPosts(request);
 
-        // 3. 태그 저장
-        if (request.getTags() != null && !request.getTags().isEmpty()) {
-            List<PostTag> tags = request.getTags().stream()
-                    .map(tag -> PostTag.builder()
-                            .postId(post.getId())
-                            .tag(tag)
-                            .build())
-                    .collect(Collectors.toList());
-            postMapper.insertPostTags(tags);
-        }
+                List<PostResponse> content = posts.stream()
+                                .map(post -> PostResponse.builder()
+                                                .id(post.getId())
+                                                .author(post.getAuthor())
+                                                .title(post.getTitle())
+                                                .content(post.getContent())
+                                                .category(post.getCategory())
+                                                .createdAt(post.getCreatedAt())
+                                                .viewCount(post.getViewCount())
+                                                .likeCount(post.getLikeCount())
+                                                // 리스트 조회 시 파일과 태그는 빈 리스트로 초기화 (N+1 문제 방지 및 성능 최적화)
+                                                .files(new ArrayList<>())
+                                                .tags(new ArrayList<>())
+                                                .build())
+                                .collect(Collectors.toList());
 
-        // 4. 응답 DTO 반환
-        return PostResponse.builder()
-                .id(post.getId())
-                .author(post.getAuthor())
-                .title(post.getTitle())
-                .content(post.getContent())
-                .files(fileResponses)
-                .tags(request.getTags())
-                .createdAt(post.getCreatedAt())
-                .build();
-    }
+                return com.infoshare.common.dto.PageResponseDto.of(content, totalElements, request.getSize());
+        }
 }

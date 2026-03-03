@@ -1,4 +1,4 @@
-package main.java.com.infoshare.dto.response;
+package com.infoshare.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +15,10 @@ public class PostResponse {
     private String author;
     private String title;
     private String content;
+    private String category;
     private List<PostFileResponse> files;
     private List<String> tags;
     private LocalDateTime createdAt;
+    private Integer viewCount;
+    private Integer likeCount;
 }

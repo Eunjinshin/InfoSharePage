@@ -1,4 +1,4 @@
-package main.java.com.infoshare.controller;
+package com.infoshare.controller;
 
 import com.infoshare.dto.request.PostCreateRequest;
 import com.infoshare.dto.response.PostResponse;
