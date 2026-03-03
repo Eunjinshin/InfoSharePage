@@ -20,8 +20,4 @@ public interface PostMapper {
     void updatePost(Post post);
 
     void deletePostTags(Long postId);
-
-    List<Post> getPosts(com.infoshare.common.dto.PageRequestDto request);
-
-    long countPosts(com.infoshare.common.dto.PageRequestDto request);
 }

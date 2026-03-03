@@ -27,4 +27,5 @@ public class PostController {
         PostResponse response = postService.createPost(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
 }

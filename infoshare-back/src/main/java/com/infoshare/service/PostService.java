@@ -89,29 +89,4 @@ public class PostService {
                                 .likeCount(0)
                                 .build();
         }
-
-        @Transactional(readOnly = true)
-        public com.infoshare.common.dto.PageResponseDto<PostResponse> getPosts(
-                        com.infoshare.common.dto.PageRequestDto request) {
-                long totalElements = postMapper.countPosts(request);
-                List<Post> posts = postMapper.getPosts(request);
-
-                List<PostResponse> content = posts.stream()
-                                .map(post -> PostResponse.builder()
-                                                .id(post.getId())
-                                                .author(post.getAuthor())
-                                                .title(post.getTitle())
-                                                .content(post.getContent())
-                                                .category(post.getCategory())
-                                                .createdAt(post.getCreatedAt())
-                                                .viewCount(post.getViewCount())
-                                                .likeCount(post.getLikeCount())
-                                                // 리스트 조회 시 파일과 태그는 빈 리스트로 초기화 (N+1 문제 방지 및 성능 최적화)
-                                                .files(new ArrayList<>())
-                                                .tags(new ArrayList<>())
-                                                .build())
-                                .collect(Collectors.toList());
-
-                return com.infoshare.common.dto.PageResponseDto.of(content, totalElements, request.getSize());
-        }
 }

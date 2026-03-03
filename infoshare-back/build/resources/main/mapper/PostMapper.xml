@@ -11,8 +11,8 @@
             LEFT JOIN posts t2 ON t.id + 1 = t2.id
             WHERE t2.id IS NULL
         </selectKey>
-        INSERT INTO posts (id, author, title, content, created_at)
-        VALUES (#{id}, #{author}, #{title}, #{content}, NOW())
+        INSERT INTO posts (id, author, title, content, category, created_at, view_count, like_count)
+        VALUES (#{id}, #{author}, #{title}, #{content}, #{category}, NOW(), 0, 0)
     </insert>
 
     <insert id="insertPostFiles" parameterType="java.util.List">
@@ -43,6 +43,7 @@
         UPDATE posts
         SET title = #{title},
             content = #{content},
+            category = #{category},
             edited_at = NOW()
         WHERE id = #{id}
     </update>

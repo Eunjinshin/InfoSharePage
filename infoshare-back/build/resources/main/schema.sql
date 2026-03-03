@@ -7,8 +7,11 @@ CREATE TABLE IF NOT EXISTS posts (
     author VARCHAR(50) NOT NULL,
     title VARCHAR(255) NOT NULL,
     content TEXT NOT NULL,
+    category VARCHAR(50),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     edited_at DATETIME,
+    view_count INT DEFAULT 0,
+    like_count INT DEFAULT 0,
     PRIMARY KEY (id)
 );
 
