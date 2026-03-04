@@ -3,10 +3,13 @@ package com.infoshare.service;
 import com.infoshare.domain.Post;
 import com.infoshare.domain.PostTag;
 import com.infoshare.domain.PostFile;
+import com.infoshare.domain.Comment;
 import com.infoshare.dto.request.PostCreateRequest;
+import com.infoshare.dto.request.CommentRequest;
 import com.infoshare.dto.response.PostResponse;
 import com.infoshare.dto.response.PostFileResponse;
 import com.infoshare.dto.response.UploadResult;
+import com.infoshare.dto.response.CommentResponse;
 import com.infoshare.repository.PostMapper;
 import com.infoshare.common.FileStore;
 import lombok.RequiredArgsConstructor;
@@ -87,6 +90,35 @@ public class PostService {
                                 .createdAt(post.getCreatedAt())
                                 .viewCount(0)
                                 .likeCount(0)
+                                .build();
+        }
+
+        /**
+         * 댓글 등록
+         *
+         * @param request 댓글 작성 요청 DTO
+         * @return 등록된 댓글 응답 DTO
+         */
+        @Transactional
+        public CommentResponse createComment(CommentRequest request) {
+                // 1. Comment 도메인 생성 및 DB 저장
+                Comment comment = Comment.builder()
+                                .postId(request.getPostId())
+                                .parentId(request.getParentId())
+                                .author(request.getAuthor() != null ? request.getAuthor() : "guest")
+                                .content(request.getContent())
+                                .createdAt(java.time.LocalDateTime.now())// 작성한 날짜 바로 출력
+                                .build();
+
+                postMapper.insertComment(comment);
+
+                // 2. 응답 DTO 반환
+                return CommentResponse.builder()
+                                .id(comment.getId())
+                                .postId(comment.getPostId())
+                                .author(comment.getAuthor())
+                                .content(comment.getContent())
+                                .createdAt(comment.getCreatedAt())
                                 .build();
         }
 }
