@@ -3,13 +3,25 @@ package com.infoshare.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.infoshare.domain.Post;
 import com.infoshare.common.dto.PageRequestDto;
 
 @Mapper
 public interface GetMapper {
+    /** 게시글 페이징 검색 */
     List<Post> getPosts(PageRequestDto request);
 
+    /** 게시글 전체 건수 (페이징용) */
     long countPosts(PageRequestDto request);
+
+    /** 인기 게시글 목록 (조회수 내림차순) */
+    List<Post> getPopularPosts(@Param("limit") int limit);
+
+    /** 최신 게시글 목록 (작성일 내림차순) */
+    List<Post> getLatestPosts(@Param("limit") int limit);
+
+    /** 특정 게시글의 태그 목록 조회 */
+    List<String> getTagsByPostId(@Param("postId") Long postId);
 }
