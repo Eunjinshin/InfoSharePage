@@ -43,4 +43,31 @@
         </where>
     </select>
 
+    <!-- 인기 게시글: 조회수 내림차순 -->
+    <select id="getPopularPosts" resultType="Post">
+        SELECT id, author, title, content, category,
+               created_at AS createdAt, edited_at AS editedAt,
+               view_count AS viewCount, like_count AS likeCount
+        FROM posts
+        ORDER BY view_count DESC, id DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 최신 게시글: 작성일 내림차순 -->
+    <select id="getLatestPosts" resultType="Post">
+        SELECT id, author, title, content, category,
+               created_at AS createdAt, edited_at AS editedAt,
+               view_count AS viewCount, like_count AS likeCount
+        FROM posts
+        ORDER BY created_at DESC, id DESC
+        LIMIT #{limit}
+    </select>
+
+    <!-- 특정 게시글의 태그 목록 -->
+    <select id="getTagsByPostId" resultType="String">
+        SELECT tag_name
+        FROM post_tags
+        WHERE post_id = #{postId}
+    </select>
+
     </mapper>
