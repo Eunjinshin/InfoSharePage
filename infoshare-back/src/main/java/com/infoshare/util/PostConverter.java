@@ -1,6 +1,7 @@
 package com.infoshare.util;
 
 import com.infoshare.domain.Post;
+import com.infoshare.dto.response.DetailResponse;
 import com.infoshare.dto.response.GetResponse;
 import com.infoshare.dto.response.MainPostResponse;
 
@@ -38,7 +39,7 @@ public class PostConverter {
 
     /**
      * Post → MainPostResponse (인기/최신 게시글용)
-     * 
+     *
      * @param post 게시글 도메인
      * @param tags 해당 게시글의 태그 목록
      */
@@ -67,4 +68,26 @@ public class PostConverter {
                 .date(date)
                 .build();
     }
+
+    /**
+     * Post → DetailResponse (게시글 상세 조회용)
+     *
+     * @param post         게시글 도메인
+     * @param commentCount 댓글 수
+     */
+    public static DetailResponse toDetailResponse(Post post, int commentCount) {
+        return DetailResponse.builder()
+                .title(post.getTitle())
+                .content(post.getContent())
+                .category(post.getCategory())
+                .author(DetailResponse.AuthorDto.builder()
+                        .name(post.getAuthor())
+                        .avatar(null) // 현재 미지원
+                        .build())
+                .publishedAt(post.getCreatedAt())
+                .views(post.getViewCount())
+                .commentCount(commentCount)
+                .build();
+    }
+
 }

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.infoshare.domain.Post;
+import com.infoshare.domain.Comment;
 import com.infoshare.common.dto.PageRequestDto;
 
 @Mapper
@@ -24,4 +25,16 @@ public interface GetMapper {
 
     /** 특정 게시글의 태그 목록 조회 */
     List<String> getTagsByPostId(@Param("postId") Long postId);
+
+    /** 카테고리 목록 조회 (중복 제거) */
+    List<String> getCategories();
+
+    /** 게시글 상세 조회 (단건) */
+    Post getPostById(@Param("postId") Long postId);
+
+    /** 특정 게시글의 댓글 수 조회 */
+    int getCommentCount(@Param("postId") Long postId);
+
+    /** 특정 게시글의 전체 댓글 목록 조회 (flat 리스트) */
+    List<Comment> getCommentsByPostId(@Param("postId") Long postId);
 }

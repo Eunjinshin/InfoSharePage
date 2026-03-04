@@ -5,11 +5,14 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.infoshare.common.dto.PageResponseDto;
+import com.infoshare.dto.response.CommentTreeResponse;
+import com.infoshare.dto.response.DetailResponse;
 import com.infoshare.dto.response.GetResponse;
 import com.infoshare.dto.response.MainPostResponse;
 import com.infoshare.service.GetService;
@@ -49,6 +52,34 @@ public class GetController {
     public ResponseEntity<List<MainPostResponse>> getLatestPosts(
             @RequestParam(defaultValue = "5") int limit) {
         List<MainPostResponse> response = getService.getLatestPosts(limit);
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * 4. 카테고리 목록 조회 API (사이드바, 글쓰기 폼용)
+     */
+    @GetMapping("/categories")
+    public ResponseEntity<List<String>> getCategories() {
+        List<String> response = getService.getCategories();
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * 5. 게시글 상세 조회 API
+     */
+    @GetMapping("/detail/{postId}")
+    public ResponseEntity<DetailResponse> getPostDetail(
+            @PathVariable Long postId) {
+        DetailResponse response = getService.getPostDetail(postId);
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * 게시글별 댓글 트리 조회 API
+     */
+    @GetMapping("/{postId}/comments")
+    public ResponseEntity<List<CommentTreeResponse>> getComments(@PathVariable Long postId) {
+        List<CommentTreeResponse> response = getService.getCommentTree(postId);
         return ResponseEntity.ok(response);
     }
 }

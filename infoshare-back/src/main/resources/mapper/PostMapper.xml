@@ -53,4 +53,10 @@
         WHERE post_id = #{postId}
     </delete>
 
+    <!-- 댓글 등록 -->
+    <insert id="insertComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO comments (post_id, parent_id, author, content, created_at)
+        VALUES (#{postId}, #{parentId}, #{author}, #{content}, #{createdAt})
+    </insert>
+
 </mapper>
