@@ -83,10 +83,22 @@ public class GetService {
          * 게시글 상세 조회
          */
         @Transactional(readOnly = true)
-        public DetailResponse getPostDetail(Long postId) {
+        public DetailResponse getPostDetail(Long postId, String userIp) {
                 Post post = getMapper.getPostById(postId);
                 int commentCount = getMapper.getCommentCount(postId);
-                return PostConverter.toDetailResponse(post, commentCount);
+                // 해당 게시글의 태그 목록도 함께 조회
+                List<String> tags = getMapper.getTagsByPostId(postId);
+
+                // 사용자의 좋아요 여부 확인 (PostMapper엔 이미 checkLikeStatus가 있음)
+                // 하지만 GetMapper엔 없으므로 PostMapper를 주입받거나 GetMapper에 메서드를 추가해야 함.
+                // 이미 PostMapper에 구현되어 있으므로 GetService에서 PostMapper를 주입받아 사용.
+                // (확인해보니 GetMapper.java에는 checkLikeStatus가 없지만 PostMapper.java에는 있음)
+                // GetService는 현재 GetMapper만 사용 중.
+                // 일단 GetMapper에 checkLikeStatus를 추가하겠음.
+                int likeStatus = getMapper.checkLikeStatus(postId, userIp);
+                boolean liked = likeStatus > 0;
+
+                return PostConverter.toDetailResponse(post, commentCount, tags, liked);
         }
 
         /**
@@ -96,7 +108,7 @@ public class GetService {
          * @return 트리 구조 댓글 목록 (최상위 댓글 + 대댓글)
          */
         @Transactional(readOnly = true)
-        public List<CommentTreeResponse> getCommentTree(Long postId) {
+        public List<CommentTreeResponse> getCommentTree(Long postId, String userIp) {
                 // 1. 게시글 작성자 조회 (isAuthor 판별용)
                 Post post = getMapper.getPostById(postId);
                 String postAuthor = post != null ? post.getAuthor() : "";
@@ -112,7 +124,7 @@ public class GetService {
                 // 4. 최상위 댓글만 추출하여 트리 빌드
                 return allComments.stream()
                                 .filter(c -> c.getParentId() == null)
-                                .map(c -> buildTree(c, childrenMap, postAuthor))
+                                .map(c -> buildTree(c, childrenMap, postAuthor, userIp))
                                 .collect(Collectors.toList());
         }
 
@@ -122,18 +134,22 @@ public class GetService {
          * @param comment     현재 댓글
          * @param childrenMap parentId → 자식 댓글 리스트 맵
          * @param postAuthor  게시글 작성자 (isAuthor 판별용)
+         * @param userIp      사용자 IP (좋아요 판별용)
          */
         private CommentTreeResponse buildTree(Comment comment,
-                        Map<Long, List<Comment>> childrenMap, String postAuthor) {
+                        Map<Long, List<Comment>> childrenMap, String postAuthor, String userIp) {
 
                 // 대댓글 재귀 빌드
                 List<CommentTreeResponse> replies = new ArrayList<>();
                 List<Comment> children = childrenMap.get(comment.getId());
                 if (children != null) {
                         for (Comment child : children) {
-                                replies.add(buildTree(child, childrenMap, postAuthor));
+                                replies.add(buildTree(child, childrenMap, postAuthor, userIp));
                         }
                 }
+
+                int likeStatus = getMapper.checkCommentLikeStatus(comment.getId(), userIp);
+                boolean liked = likeStatus > 0;
 
                 return CommentTreeResponse.builder()
                                 .id(comment.getId())
@@ -145,6 +161,8 @@ public class GetService {
                                 .createdAt(comment.getCreatedAt())
                                 .isAuthor(comment.getAuthor() != null
                                                 && comment.getAuthor().equals(postAuthor))
+                                .likeCount(comment.getLikeCount() != null ? comment.getLikeCount() : 0)
+                                .liked(liked)
                                 .replies(replies)
                                 .build();
         }

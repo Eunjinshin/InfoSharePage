@@ -69,8 +69,10 @@ public class GetController {
      */
     @GetMapping("/detail/{postId}")
     public ResponseEntity<DetailResponse> getPostDetail(
-            @PathVariable Long postId) {
-        DetailResponse response = getService.getPostDetail(postId);
+            @PathVariable Long postId,
+            jakarta.servlet.http.HttpServletRequest request) {
+        String userIp = request.getRemoteAddr();
+        DetailResponse response = getService.getPostDetail(postId, userIp);
         return ResponseEntity.ok(response);
     }
 
@@ -78,8 +80,11 @@ public class GetController {
      * 6. 게시글별 댓글 트리 조회 API
      */
     @GetMapping("/comments/{postId}")
-    public ResponseEntity<List<CommentTreeResponse>> getComments(@PathVariable Long postId) {
-        List<CommentTreeResponse> response = getService.getCommentTree(postId);
+    public ResponseEntity<List<CommentTreeResponse>> getComments(
+            @PathVariable Long postId,
+            jakarta.servlet.http.HttpServletRequest request) {
+        String userIp = request.getRemoteAddr();
+        List<CommentTreeResponse> response = getService.getCommentTree(postId, userIp);
         return ResponseEntity.ok(response);
     }
 

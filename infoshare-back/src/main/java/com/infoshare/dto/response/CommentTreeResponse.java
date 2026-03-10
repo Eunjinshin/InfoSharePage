@@ -26,6 +26,9 @@ public class CommentTreeResponse {
     private LocalDateTime createdAt;
     private boolean isAuthor;
 
+    private Integer likeCount;
+    private boolean liked;
+
     /** 대댓글 목록 (재귀 구조) */
     @Setter
     private List<CommentTreeResponse> replies;

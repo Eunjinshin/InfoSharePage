@@ -74,9 +74,12 @@ public class PostConverter {
      *
      * @param post         게시글 도메인
      * @param commentCount 댓글 수
+     * @param tags         게시글 태그 목록
+     * @param liked        현재 사용자의 좋아요 여부
      */
-    public static DetailResponse toDetailResponse(Post post, int commentCount) {
+    public static DetailResponse toDetailResponse(Post post, int commentCount, List<String> tags, boolean liked) {
         return DetailResponse.builder()
+                .id(post.getId())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .category(post.getCategory())
@@ -87,6 +90,9 @@ public class PostConverter {
                 .publishedAt(post.getCreatedAt())
                 .views(post.getViewCount())
                 .commentCount(commentCount)
+                .likeCount(post.getLikeCount()) // 게시글 좋아요 수
+                .liked(liked) // 좋아요 상태 매핑
+                .tags(tags)
                 .build();
     }
 
