@@ -1,5 +1,6 @@
 package com.infoshare.service;
 
+import com.infoshare.dto.request.CommentUpdateRequest;
 import com.infoshare.dto.request.EditRequest;
 import com.infoshare.dto.response.EditResponse;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.infoshare.common.FileStore;
+import com.infoshare.domain.Comment;
 import com.infoshare.domain.Post;
 import com.infoshare.domain.PostFile;
 import com.infoshare.domain.PostTag;
@@ -93,5 +95,14 @@ public class EditService {
                 request.getTags(),
                 LocalDateTime.now() // 현재 시간을 임시 반환 (실제로는 DB에서 재조회 권장)
         );
+    }
+
+    @Transactional
+    public void editComment(Long id, CommentUpdateRequest request) {
+        Comment comment = Comment.builder()
+                .id(id)
+                .content(request.getContent())
+                .build();
+        postMapper.updateComment(comment);
     }
 }

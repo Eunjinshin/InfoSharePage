@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.infoshare.domain.Post;
 import com.infoshare.domain.Comment;
 import com.infoshare.common.dto.PageRequestDto;
+import com.infoshare.dto.response.PopularTagResponse;
 
 @Mapper
 public interface GetMapper {
@@ -37,4 +38,7 @@ public interface GetMapper {
 
     /** 특정 게시글의 전체 댓글 목록 조회 (flat 리스트) */
     List<Comment> getCommentsByPostId(@Param("postId") Long postId);
+
+    /** 인기 태그 조회 */
+    List<PopularTagResponse> getPopularTags(@Param("limit") int limit);
 }

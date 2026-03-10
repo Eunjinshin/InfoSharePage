@@ -53,10 +53,67 @@
         WHERE post_id = #{postId}
     </delete>
 
+    <update id="softDeletePost" parameterType="long">
+        UPDATE posts
+        SET is_deleted = true
+        WHERE id = #{postId}
+    </update>
+
     <!-- 댓글 등록 -->
     <insert id="insertComment" parameterType="Comment" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO comments (post_id, parent_id, author, content, created_at)
         VALUES (#{postId}, #{parentId}, #{author}, #{content}, #{createdAt})
     </insert>
+
+    <!-- 댓글 내용 수정 -->
+    <update id="updateComment" parameterType="Comment">
+        UPDATE comments
+        SET content = #{content}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 댓글 물리 삭제 -->
+    <delete id="deleteComment" parameterType="long">
+        DELETE FROM comments
+        WHERE id = #{commentId}
+    </delete>
+
+    <!-- 좋아요 상태 확인 -->
+    <select id="checkLikeStatus" resultType="int">
+        SELECT COUNT(*)
+        FROM post_likes
+        WHERE post_id = #{postId} AND user_ip = #{userIp}
+    </select>
+
+    <!-- 좋아요 추가 -->
+    <insert id="insertPostLike">
+        INSERT INTO post_likes (post_id, user_ip)
+        VALUES (#{postId}, #{userIp})
+    </insert>
+
+    <!-- 좋아요 삭제 -->
+    <delete id="deletePostLike">
+        DELETE FROM post_likes
+        WHERE post_id = #{postId} AND user_ip = #{userIp}
+    </delete>
+
+    <!-- 게시글 좋아요 수 증가 -->
+    <update id="incrementLikeCount" parameterType="long">
+        UPDATE posts
+        SET like_count = like_count + 1
+        WHERE id = #{postId}
+    </update>
+
+    <!-- 게시글 좋아요 수 감소 -->
+    <update id="decrementLikeCount" parameterType="long">
+        UPDATE posts
+        SET like_count = CASE WHEN like_count > 0 THEN like_count - 1 ELSE 0 END
+        WHERE id = #{postId}
+    </update>
+
+    <!-- 최신 좋아요 수 조회 -->
+    <select id="getLikeCount" parameterType="long" resultType="int">
+        SELECT like_count FROM posts WHERE id = #{postId}
+    </select>
 
 </mapper>

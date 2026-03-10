@@ -19,4 +19,16 @@ public class PostDummyDataFactory {
                 .likeCount(0)
                 .build();
     }
+
+    // 테스트용 댓글(Comment) 객체 생성
+    public static com.infoshare.domain.Comment createDummyComment(Long postId, Long parentId, String author,
+            String content) {
+        return com.infoshare.domain.Comment.builder()
+                .postId(postId)
+                .parentId(parentId)
+                .author(author)
+                .content(content)
+                .createdAt(LocalDateTime.now())
+                .build();
+    }
 }
