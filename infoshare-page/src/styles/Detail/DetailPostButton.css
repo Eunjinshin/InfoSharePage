@@ -47,7 +47,7 @@
     background-color: rgba(158, 223, 255, 0.2);
 }
 
-.detail-action-btn:focus {
+.detail-action-btn:focus-visible {
     outline: 2px solid var(--primary-color, #9edfff);
     background-color: rgba(158, 223, 255, 0.3);
 }
@@ -64,12 +64,78 @@
     /* red-50 */
 }
 
-.detail-action-btn.like-btn:focus {
+.detail-action-btn.like-btn:focus-visible {
     outline: 2px solid #ef4444;
     background-color: #fee2e2;
 }
 
+/* active 상태: 좋아요 선택됨 */
+.detail-action-btn.like-btn.active {
+    color: #ef4444;
+    background-color: #fef2f2;
+    border: 1.5px solid #fca5a5;
+}
+
 .detail-action-btn.like-btn:active {
+    background-color: #fecaca;
+    outline: 2px solid #f87171;
+}
+
+/* Author Actions */
+.detail-post-author-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.detail-author-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    background-color: var(--slate-100, #f1f5f9);
+    color: var(--slate-700, #334155);
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.detail-author-btn:hover {
+    color: var(--primary-color, #9edfff);
+    background-color: rgba(158, 223, 255, 0.2);
+}
+
+.detail-author-btn:focus {
+    outline: 2px solid var(--primary-color, #9edfff);
+    background-color: rgba(158, 223, 255, 0.3);
+}
+
+.detail-author-btn:active {
+    background-color: rgba(158, 223, 255, 0.4);
+    outline: 2px solid rgba(158, 223, 255, 0.8);
+}
+
+.detail-author-btn.delete-btn {
+    color: #ef4444;
+}
+
+.detail-author-btn.delete-btn:hover {
+    color: #ef4444;
+    background-color: #fef2f2;
+}
+
+.detail-author-btn.delete-btn:focus {
+    outline: 2px solid #ef4444;
+    background-color: #fee2e2;
+}
+
+.detail-author-btn.delete-btn:active {
     background-color: #fecaca;
     outline: 2px solid #f87171;
 }

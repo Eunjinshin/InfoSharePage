@@ -2,6 +2,7 @@ import React from 'react';
 import LogoIcon from '../assets/icons/logo.svg?react'; //SVG이미지를 자동으로 변경
 import '../styles/pages/Header.css';
 import { HEADER_TEXT, TITLE_TEXT } from '../constants/MenuText';
+import { Link, useNavigate } from 'react-router-dom';
 
 /* 
  * currentMenu.map() 사용법 설명
@@ -21,25 +22,25 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ type = 'main' }) => {
     const currentMenu = HEADER_TEXT[type];
+    const navigate = useNavigate();
 
     return (
         <header className="header">
             <div className="header-content">
-                <div className="header-logo">
+                <Link to="/" className="header-logo" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <LogoIcon />
                     <h2>{TITLE_TEXT.TITLE}</h2>
-                </div>
+                </Link>
                 <div className="header-nav-container">
                     <nav className="header-nav">
                         {currentMenu.map((menu, index) => (
-                            <a key={index}
-                                href={menu.href}>
+                            <Link key={index} to={menu.href}>
                                 {menu.text}
-                            </a>
+                            </Link>
                         ))}
                     </nav>
                     <button className="header-signup-btn"
-                        onClick={() => window.location.href = '/login'}>
+                        onClick={() => navigate('/login')}>
                         {TITLE_TEXT.SIGN}
                     </button>
                 </div>

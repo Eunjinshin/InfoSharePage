@@ -2,8 +2,11 @@ import { MAIN_TEXT_TEST } from "../../tests/Mainpagedata";
 import '../../styles/components/CommunityStats.css';
 import { Button } from "./Button";
 import { SIDEBAR } from "../../constants/Texts";
+import { useNavigate } from "react-router-dom";
 
 export const CommunityStats = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="community-container">
             <h3 className="community-container-title">
@@ -24,7 +27,7 @@ export const CommunityStats = () => {
                     </div>
                 ))}
             </div>
-            <Button className="community-container-join-btn">
+            <Button className="community-container-join-btn" onClick={() => navigate('/login')}>
                 {SIDEBAR.JOIN_BTN}
             </Button>
         </div>

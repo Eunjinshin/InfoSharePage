@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MaterialIcon } from "../../utils/MaterialIcon";
 import { TITLE_BAR } from "../../constants/Texts";
 import { Button } from "../common/Button";
@@ -7,6 +8,7 @@ import '../../styles/components/SearchBar.css';
 export const SearchBar: React.FC = () => {
     // 사용자가 입력한 검색어를 상태로 관리합니다.
     const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
 
     /**
      * 검색 폼이 제출될 때 실행되는 함수입니다.
@@ -18,9 +20,9 @@ export const SearchBar: React.FC = () => {
         // 검색어가 비어있거나 공백만 있는 경우 처리안함
         if (!searchQuery.trim()) return;
 
-        // TODO: 나중에 이 부분에 실제 검색 API 호출이나 
-        // 상위 컴포넌트로 검색어 전달 로직이 들어갑니다.
-        console.log(`Searching for: ${searchQuery}`);
+        // 검색어와 함께 게시판 페이지로 이동합니다.
+        // API 요청은 게시판 페이지(BoardPage)에서 URL 파라미터를 읽어 처리합니다.
+        navigate(`/board?keyword=${encodeURIComponent(searchQuery.trim())}`);
 
         // 검색 실행 후 입력창 초기화 (선택 사항)
         // setSearchQuery('');

@@ -220,3 +220,57 @@
 :root[class~="dark"] .detail-comment-author-badge {
     color: var(--slate-300, #cbd5e1);
 }
+
+/* ── 메타 우측 영역 (시간 + 삭제 버튼 row) ── */
+.detail-comment-meta-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ── 댓글/답글 삭제 버튼 ── */
+.detail-comment-delete-btn {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 0;
+    line-height: 1;
+}
+
+.detail-comment-delete-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ── 답글 폼 래퍼 ── */
+.detail-comment-reply-form-wrap {
+    margin-top: 1rem;
+}
+
+/* ── 좋아요 아이콘: 기본(outline) / 선택(fill+빨강) ── */
+.detail-comment-action-btn .like-icon {
+    font-variation-settings: 'FILL' 0;
+    transition: font-variation-settings 0.15s, color 0.15s;
+}
+
+.detail-comment-action-btn.liked .like-icon {
+    font-variation-settings: 'FILL' 1;
+    color: #ef4444;
+}
+
+/* ── detail-post-body 아이콘 크기 override (author-actions) ── */
+.detail-author-icon {
+    font-size: 18px !important;
+}
+
+/* ── detail-action-btn 아이콘: 기본(outline) / 선택(fill) ── */
+.detail-action-btn .action-icon {
+    font-variation-settings: 'FILL' 0;
+    transition: font-variation-settings 0.2s;
+}
+
+.detail-action-btn.active .action-icon {
+    font-variation-settings: 'FILL' 1;
+}

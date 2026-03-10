@@ -6,6 +6,7 @@ import '../../styles/components/BreadcrumbNavigation.css';
 export interface BreadcrumbPath {
     name: string;
     url?: string;
+    action?: () => void;
 }
 
 interface BreadcrumbNavigationProps {
@@ -29,6 +30,10 @@ export const BreadcrumbNavigation: React.FC<BreadcrumbNavigationProps> = ({ path
                         <span className="detail-breadcrumb-current">
                             {path.name}
                         </span>
+                    ) : path.action ? (
+                        <a href="#" onClick={(e) => { e.preventDefault(); path.action!(); }} className="detail-breadcrumb-link">
+                            {path.name}
+                        </a>
                     ) : (
                         <a href={path.url || "#"} className="detail-breadcrumb-link">
                             {path.name}

@@ -2,8 +2,11 @@ import React from "react";
 import { MaterialIcon } from "../../utils/MaterialIcon";
 import { MAIN_TEXT } from "../../constants/Texts";
 import "../../styles/main/MainPopularPosts.css";
+import fallbackImage from "../../assets/board_defulat.png";
+import { Link } from "react-router-dom";
 
 export interface PostCards {
+    id?: number | string;
     image: string;
     category: string;
     title: string;
@@ -33,12 +36,16 @@ export const PostContentCards: React.FC<PostContentCardsProps> = ({ postCards })
     return (
         <div className="popular-posts-grid">
             {displayPosts.map((postCard, index) => (
-                <div key={index} className="popular-post-card group">
+                <Link to={`/detail/${postCard.id || index}`} key={index} className="popular-post-card group" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <div className="popular-post-img-wrapper">
                         <img
-                            alt={postCard.title}
+                            alt={postCard.title || 'Post Image'}
                             className="popular-post-img"
-                            src={postCard.image}
+                            src={postCard.image || fallbackImage}
+                            onError={(e) => {
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = fallbackImage;
+                            }}
                         />
                     </div>
                     <div className="popular-post-content">
@@ -65,7 +72,7 @@ export const PostContentCards: React.FC<PostContentCardsProps> = ({ postCards })
                             </div>
                         </div>
                     </div>
-                </div>
+                </Link>
             ))}
         </div>
     );
