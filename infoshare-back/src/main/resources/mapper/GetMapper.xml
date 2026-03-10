@@ -100,7 +100,7 @@
     <!-- 게시글별 전체 댓글 조회 (flat 리스트, 작성일 오름차순) -->
     <select id="getCommentsByPostId" resultType="Comment">
         SELECT id, post_id AS postId, parent_id AS parentId,
-               author, content, created_at AS createdAt
+               author, content, like_count AS likeCount, created_at AS createdAt
         FROM comments
         WHERE post_id = #{postId}
         ORDER BY created_at ASC
@@ -115,6 +115,20 @@
         GROUP BY pt.tag_name
         ORDER BY count DESC
         LIMIT #{limit}
+    </select>
+
+    <!-- 좋아요 상태 확인 -->
+    <select id="checkLikeStatus" resultType="int">
+        SELECT COUNT(*)
+        FROM post_likes
+        WHERE post_id = #{postId} AND user_ip = #{userIp}
+    </select>
+
+    <!-- 댓글 좋아요 상태 확인 -->
+    <select id="checkCommentLikeStatus" resultType="int">
+        SELECT COUNT(*)
+        FROM comment_likes
+        WHERE comment_id = #{commentId} AND user_ip = #{userIp}
     </select>
 
 </mapper>

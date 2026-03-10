@@ -41,4 +41,10 @@ public interface GetMapper {
 
     /** 인기 태그 조회 */
     List<PopularTagResponse> getPopularTags(@Param("limit") int limit);
+
+    /** 좋아요 등록 확인 (IP 기반) */
+    int checkLikeStatus(@Param("postId") Long postId, @Param("userIp") String userIp);
+
+    /** 댓글 좋아요 등록 확인 (IP 기반) */
+    int checkCommentLikeStatus(@Param("commentId") Long commentId, @Param("userIp") String userIp);
 }

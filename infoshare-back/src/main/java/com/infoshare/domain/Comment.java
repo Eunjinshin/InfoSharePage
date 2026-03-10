@@ -20,5 +20,6 @@ public class Comment {
     private Long parentId;
     private String author;
     private String content;
+    private Integer likeCount;
     private LocalDateTime createdAt;
 }
