@@ -148,4 +148,12 @@ public class GetService {
                                 .replies(replies)
                                 .build();
         }
+
+        /**
+         * 인기 태그 목록 추출
+         */
+        @Transactional(readOnly = true)
+        public List<com.infoshare.dto.response.PopularTagResponse> getPopularTags(int limit) {
+                return getMapper.getPopularTags(limit);
+        }
 }

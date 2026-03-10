@@ -25,9 +25,39 @@ public interface PostMapper {
     /** 게시글 수정 */
     void updatePost(Post post);
 
+    /** 게시글 소프트 삭제 */
+    void softDeletePost(Long postId);
+
     /** 게시글의 태그 전체 삭제 */
     void deletePostTags(Long postId);
 
     /** 댓글 등록 */
     void insertComment(Comment comment);
+
+    /** 댓글 내용 수정 */
+    void updateComment(Comment comment);
+
+    /** 댓글 물리 삭제 */
+    void deleteComment(Long commentId);
+
+    /** 좋아요 등록 확인 */
+    int checkLikeStatus(@org.apache.ibatis.annotations.Param("postId") Long postId,
+            @org.apache.ibatis.annotations.Param("userIp") String userIp);
+
+    /** 좋아요 추가 */
+    void insertPostLike(@org.apache.ibatis.annotations.Param("postId") Long postId,
+            @org.apache.ibatis.annotations.Param("userIp") String userIp);
+
+    /** 좋아요 삭제 */
+    void deletePostLike(@org.apache.ibatis.annotations.Param("postId") Long postId,
+            @org.apache.ibatis.annotations.Param("userIp") String userIp);
+
+    /** 게시글 좋아요 수 증가 */
+    void incrementLikeCount(@org.apache.ibatis.annotations.Param("postId") Long postId);
+
+    /** 게시글 좋아요 수 감소 */
+    void decrementLikeCount(@org.apache.ibatis.annotations.Param("postId") Long postId);
+
+    /** 조아요 수 반환 */
+    int getLikeCount(@org.apache.ibatis.annotations.Param("postId") Long postId);
 }

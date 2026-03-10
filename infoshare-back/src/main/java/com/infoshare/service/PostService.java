@@ -10,6 +10,7 @@ import com.infoshare.dto.response.PostResponse;
 import com.infoshare.dto.response.PostFileResponse;
 import com.infoshare.dto.response.UploadResult;
 import com.infoshare.dto.response.CommentResponse;
+import com.infoshare.dto.response.LikeResponse;
 import com.infoshare.repository.PostMapper;
 import com.infoshare.common.FileStore;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,9 @@ public class PostService {
         private final PostMapper postMapper;
         private final FileStore fileStore;
 
+        /**
+         * 1. 게시글 작성
+         */
         @Transactional
         public PostResponse createPost(PostCreateRequest request) {
 
@@ -94,7 +98,7 @@ public class PostService {
         }
 
         /**
-         * 댓글 등록
+         * 2.댓글 등록
          *
          * @param request 댓글 작성 요청 DTO
          * @return 등록된 댓글 응답 DTO
@@ -119,6 +123,40 @@ public class PostService {
                                 .author(comment.getAuthor())
                                 .content(comment.getContent())
                                 .createdAt(comment.getCreatedAt())
+                                .build();
+        }
+
+        /**
+         * 3. 게시글 추천 토글 (IP 기반)
+         *
+         * @param postId 게시글 ID
+         * @param userIp 사용자 IP
+         * @return 갱신된 좋아요 상태 및 총합
+         */
+        @Transactional
+        public LikeResponse togglePostLike(Long postId, String userIp) {
+                int isLiked = postMapper.checkLikeStatus(postId, userIp);
+                boolean currentLikeStatus;
+
+                if (isLiked > 0) {
+                        // 이미 추천한 상태 -> 취소
+                        postMapper.deletePostLike(postId, userIp);
+                        postMapper.decrementLikeCount(postId);
+                        currentLikeStatus = false;
+                } else {
+                        // 추천하지 않은 상태 -> 추천
+                        postMapper.insertPostLike(postId, userIp);
+                        postMapper.incrementLikeCount(postId);
+                        currentLikeStatus = true;
+                }
+
+                int totalLikes = postMapper.getLikeCount(postId);
+                String message = currentLikeStatus ? "게시글을 추천했습니다." : "게시글 추천을 취소했습니다.";
+
+                return LikeResponse.builder()
+                                .liked(currentLikeStatus)
+                                .totalLikes(totalLikes)
+                                .message(message)
                                 .build();
         }
 }

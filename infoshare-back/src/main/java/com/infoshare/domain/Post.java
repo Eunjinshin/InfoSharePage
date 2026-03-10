@@ -21,4 +21,5 @@ public class Post {
     private LocalDateTime editedAt;
     private Integer viewCount;
     private Integer likeCount;
+    private Boolean isDeleted;
 }

@@ -40,7 +40,7 @@ public class GetController {
      */
     @GetMapping("/popular")
     public ResponseEntity<List<MainPostResponse>> getPopularPosts(
-            @RequestParam(defaultValue = "5") int limit) {
+            @RequestParam int limit) {
         List<MainPostResponse> response = getService.getPopularPosts(limit);
         return ResponseEntity.ok(response);
     }
@@ -50,7 +50,7 @@ public class GetController {
      */
     @GetMapping("/latest")
     public ResponseEntity<List<MainPostResponse>> getLatestPosts(
-            @RequestParam(defaultValue = "5") int limit) {
+            @RequestParam int limit) {
         List<MainPostResponse> response = getService.getLatestPosts(limit);
         return ResponseEntity.ok(response);
     }
@@ -75,11 +75,23 @@ public class GetController {
     }
 
     /**
-     * 게시글별 댓글 트리 조회 API
+     * 6. 게시글별 댓글 트리 조회 API
      */
-    @GetMapping("/{postId}/comments")
+    @GetMapping("/comments/{postId}")
     public ResponseEntity<List<CommentTreeResponse>> getComments(@PathVariable Long postId) {
         List<CommentTreeResponse> response = getService.getCommentTree(postId);
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * 7. 인기 태그 목록 추출 API
+     */
+    @GetMapping("/tags/popular")
+    public ResponseEntity<com.infoshare.common.dto.DataResponseDto<com.infoshare.dto.response.PopularTagResponse>> getPopularTags(
+            @RequestParam(defaultValue = "10") int limit) {
+        List<com.infoshare.dto.response.PopularTagResponse> tags = getService.getPopularTags(limit);
+        com.infoshare.common.dto.DataResponseDto<com.infoshare.dto.response.PopularTagResponse> response = new com.infoshare.common.dto.DataResponseDto<>(
+                tags);
         return ResponseEntity.ok(response);
     }
 }
