@@ -30,30 +30,35 @@ public class SearchService {
      */
     @Transactional(readOnly = true)
     public SearchResponseDto<SearchPostResponse> searchPosts(int page, int size, String keyword) {
-        // 기존 0-based PageRequestDto를 활용하기 위해 page - 1 변환
-        PageRequestDto request = new PageRequestDto();
-        request.setPage(Math.max(0, page - 1));
-        request.setSize(size);
-        request.setKeyword(keyword);
-        request.setSort("latest"); // 기본적으로 최신순 정렬
+        try {
+            // 기존 0-based PageRequestDto를 활용하기 위해 page - 1 변환
+            PageRequestDto request = new PageRequestDto();
+            request.setPage(Math.max(0, page - 1));
+            request.setSize(size);
+            request.setKeyword(keyword);
+            request.setSort("latest"); // 기본적으로 최신순 정렬
 
-        long totalElements = getMapper.countPosts(request);
-        List<Post> posts = getMapper.getPosts(request);
+            long totalElements = getMapper.countPosts(request);
+            List<Post> posts = getMapper.getPosts(request);
 
-        List<SearchPostResponse> content = posts.stream()
-                .map(post -> {
-                    List<String> tags = getMapper.getTagsByPostId(post.getId());
-                    return SearchPostResponse.builder()
-                            .id(post.getId())
-                            .title(post.getTitle())
-                            .author(post.getAuthor())
-                            .createdAt(post.getCreatedAt())
-                            .viewCount(post.getViewCount())
-                            .tags(tags)
-                            .build();
-                })
-                .collect(Collectors.toList());
+            List<SearchPostResponse> content = posts.stream()
+                    .map(post -> {
+                        List<String> tags = getMapper.getTagsByPostId(post.getId());
+                        return SearchPostResponse.builder()
+                                .id(post.getId())
+                                .title(post.getTitle())
+                                .author(post.getAuthor())
+                                .createdAt(post.getCreatedAt())
+                                .viewCount(post.getViewCount())
+                                .tags(tags)
+                                .build();
+                    })
+                    .collect(Collectors.toList());
 
-        return SearchResponseDto.of(content, page, totalElements, size);
+            return SearchResponseDto.of(content, page, totalElements, size);
+        } catch (Exception e) {
+            e.printStackTrace(); // 500 에러 원인 파악을 위해 콘솔에 스택트레이스를 찍습니다.
+            throw e;
+        }
     }
 }
