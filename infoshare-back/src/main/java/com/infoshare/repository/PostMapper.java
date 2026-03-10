@@ -60,4 +60,27 @@ public interface PostMapper {
 
     /** 조아요 수 반환 */
     int getLikeCount(@org.apache.ibatis.annotations.Param("postId") Long postId);
+
+    // ====== 댓글 좋아요 ======
+
+    /** 댓글 좋아요 등록 확인 */
+    int checkCommentLikeStatus(@org.apache.ibatis.annotations.Param("commentId") Long commentId,
+            @org.apache.ibatis.annotations.Param("userIp") String userIp);
+
+    /** 댓글 좋아요 추가 */
+    void insertCommentLike(@org.apache.ibatis.annotations.Param("commentId") Long commentId,
+            @org.apache.ibatis.annotations.Param("userIp") String userIp);
+
+    /** 댓글 좋아요 삭제 */
+    void deleteCommentLike(@org.apache.ibatis.annotations.Param("commentId") Long commentId,
+            @org.apache.ibatis.annotations.Param("userIp") String userIp);
+
+    /** 댓글 좋아요 수 증가 */
+    void incrementCommentLikeCount(@org.apache.ibatis.annotations.Param("commentId") Long commentId);
+
+    /** 댓글 좋아요 수 감소 */
+    void decrementCommentLikeCount(@org.apache.ibatis.annotations.Param("commentId") Long commentId);
+
+    /** 댓글 좋아요 수 반환 */
+    int getCommentLikeCount(@org.apache.ibatis.annotations.Param("commentId") Long commentId);
 }

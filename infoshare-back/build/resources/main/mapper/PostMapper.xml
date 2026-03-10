@@ -116,4 +116,44 @@
         SELECT like_count FROM posts WHERE id = #{postId}
     </select>
 
+    <!-- ====== 댓글 좋아요 ====== -->
+
+    <!-- 댓글 좋아요 상태 확인 -->
+    <select id="checkCommentLikeStatus" resultType="int">
+        SELECT COUNT(*)
+        FROM comment_likes
+        WHERE comment_id = #{commentId} AND user_ip = #{userIp}
+    </select>
+
+    <!-- 댓글 좋아요 추가 -->
+    <insert id="insertCommentLike">
+        INSERT INTO comment_likes (comment_id, user_ip)
+        VALUES (#{commentId}, #{userIp})
+    </insert>
+
+    <!-- 댓글 좋아요 삭제 -->
+    <delete id="deleteCommentLike">
+        DELETE FROM comment_likes
+        WHERE comment_id = #{commentId} AND user_ip = #{userIp}
+    </delete>
+
+    <!-- 댓글 좋아요 수 증가 -->
+    <update id="incrementCommentLikeCount" parameterType="long">
+        UPDATE comments
+        SET like_count = like_count + 1
+        WHERE id = #{commentId}
+    </update>
+
+    <!-- 댓글 좋아요 수 감소 -->
+    <update id="decrementCommentLikeCount" parameterType="long">
+        UPDATE comments
+        SET like_count = CASE WHEN like_count > 0 THEN like_count - 1 ELSE 0 END
+        WHERE id = #{commentId}
+    </update>
+
+    <!-- 댓글 최신 좋아요 수 조회 -->
+    <select id="getCommentLikeCount" parameterType="long" resultType="int">
+        SELECT like_count FROM comments WHERE id = #{commentId}
+    </select>
+
 </mapper>

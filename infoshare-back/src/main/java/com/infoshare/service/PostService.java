@@ -159,4 +159,38 @@ public class PostService {
                                 .message(message)
                                 .build();
         }
+
+        /**
+         * 4. 댓글 추천 토글 (IP 기반)
+         *
+         * @param commentId 댓글 ID
+         * @param userIp    사용자 IP
+         * @return 갱신된 좋아요 상태 및 총합
+         */
+        @Transactional
+        public LikeResponse toggleCommentLike(Long commentId, String userIp) {
+                int isLiked = postMapper.checkCommentLikeStatus(commentId, userIp);
+                boolean currentLikeStatus;
+
+                if (isLiked > 0) {
+                        // 이미 추천한 상태 -> 취소
+                        postMapper.deleteCommentLike(commentId, userIp);
+                        postMapper.decrementCommentLikeCount(commentId);
+                        currentLikeStatus = false;
+                } else {
+                        // 추천하지 않은 상태 -> 추천
+                        postMapper.insertCommentLike(commentId, userIp);
+                        postMapper.incrementCommentLikeCount(commentId);
+                        currentLikeStatus = true;
+                }
+
+                int totalLikes = postMapper.getCommentLikeCount(commentId);
+                String message = currentLikeStatus ? "댓글을 추천했습니다." : "댓글 추천을 취소했습니다.";
+
+                return LikeResponse.builder()
+                                .liked(currentLikeStatus)
+                                .totalLikes(totalLikes)
+                                .message(message)
+                                .build();
+        }
 }

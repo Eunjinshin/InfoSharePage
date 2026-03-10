@@ -53,4 +53,16 @@ public class PostController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * 4. 댓글 추천(좋아요) 토글 API
+     */
+    @PostMapping("/comment/{commentId}/likes")
+    public ResponseEntity<com.infoshare.dto.response.LikeResponse> toggleCommentLike(
+            @org.springframework.web.bind.annotation.PathVariable Long commentId,
+            jakarta.servlet.http.HttpServletRequest request) {
+        String userIp = request.getRemoteAddr();
+        com.infoshare.dto.response.LikeResponse response = postService.toggleCommentLike(commentId, userIp);
+        return ResponseEntity.ok(response);
+    }
+
 }
