@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../../styles/Board/BoardContentsFilter.css';
 import { FILTER_TEXT } from '../../constants/FilterText';
 import { BoardFilterSearch } from './BoardFilterSearch';
@@ -12,11 +12,21 @@ import { BoardFilterSearch } from './BoardFilterSearch';
  * 아니라면 회색 'default-btn' 스타일을 적용합니다.
  */
 
-type FilterType = 'All Posts' | 'Latest' | 'Popular';
+export type FilterType = 'All Posts' | 'Latest' | 'Popular';
 
-export const BoardContentsFilter = () => {
-    // 현재 선택된 필터 버튼을 기억하는 상태 (기본값: 'All Posts')
-    const [activeFilter, setActiveFilter] = useState<FilterType>('All Posts');
+interface BoardContentsFilterProps {
+    onSearch: (keyword: string) => void;
+    initialKeyword?: string;
+    activeFilter: FilterType;
+    onFilterChange: (filter: FilterType) => void;
+}
+
+export const BoardContentsFilter: React.FC<BoardContentsFilterProps> = ({ 
+    onSearch, 
+    initialKeyword, 
+    activeFilter, 
+    onFilterChange 
+}) => {
 
     // 필터 버튼들에 들어갈 고정된 데이터 배열
     const filters = [
@@ -32,15 +42,15 @@ export const BoardContentsFilter = () => {
                     <button
                         key={filter.id}
                         className={`board-filter-btn ${activeFilter === filter.id ? 'active-btn' : 'default-btn'}`}
-                        // 버튼을 클릭하면 활성화 상태를 현재 내 id 값으로 업데이트합니다.
-                        onClick={() => setActiveFilter(filter.id)}
+                        // 버튼을 클릭하면 상위 컴포넌트로 변경된 필터 id를 전달합니다.
+                        onClick={() => onFilterChange(filter.id)}
                     >
                         <span>{filter.label}</span>
                     </button>
                 ))}
             </div>
 
-            <BoardFilterSearch />
+            <BoardFilterSearch onSearch={onSearch} initialKeyword={initialKeyword} />
         </div>
     );
 };

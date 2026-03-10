@@ -3,9 +3,12 @@ import { WRITE_POST } from "../../constants/Texts";
 import { MaterialIcon } from "../../utils/MaterialIcon";
 
 
-export const WriteTagForm: React.FC = () => {
+export interface WriteTagFormProps {
+    tags: string[];
+    setTags: React.Dispatch<React.SetStateAction<string[]>>;
+}
 
-    const [tags, setTags] = useState<string[]>([]);
+export const WriteTagForm: React.FC<WriteTagFormProps> = ({ tags, setTags }) => {
     const [tagInput, setTagInput] = useState('');
 
     const handleAddTag = (e: React.KeyboardEvent<HTMLInputElement>) => {

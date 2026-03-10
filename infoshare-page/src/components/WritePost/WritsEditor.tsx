@@ -1,16 +1,17 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { WRITE_POST } from '../../constants/Texts';
 
 // ✅ TOAST UI Editor 기능 및 CSS 임포트
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css'; // 에디터 기본 스타일 (필수)
 
-export const WritsEditor: React.FC = () => {
+export interface WritsEditorProps {
+    editorRef: React.RefObject<Editor | null>;
+}
+
+export const WritsEditor: React.FC<WritsEditorProps> = ({ editorRef }) => {
     // ✅ 에디터 컴포넌트를 조작하거나 작성된 데이터를 가져오기 위한 useRef
-    // 나중에 "저장" 버튼 등을 눌렀을 때 아래와 같이 내용을 가져올 수 있습니다:
-    // const contentMarkdown = editorRef.current?.getInstance().getMarkdown();
-    // const contentHtml = editorRef.current?.getInstance().getHTML();
-    const editorRef = useRef<Editor>(null);
+    // 상위 컴포넌트(WritePostForm)에서 넘겨받은 editorRef를 연결하여 사용합니다.
 
     return (
         <div>

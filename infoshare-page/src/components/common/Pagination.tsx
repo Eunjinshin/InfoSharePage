@@ -3,49 +3,27 @@
  * @description 게시글 리스트 하단의 페이지네이션(페이지 이동) 컴포넌트입니다.
  */
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import '../../styles/components/Pagination.css';
 import { CHEVRON_ICONS } from '../../constants/Icons';
 import { PAGINATION } from '../../constants/Texts';
 
 interface PaginationProps {
-    onPageChange?: (page: number) => void;
+    currentPage: number;
+    totalPages: number;
+    totalItems: number;
+    onPageChange: (page: number) => void;
 }
 
-export const Pagination: React.FC<PaginationProps> = ({ onPageChange }) => {
-    // 상태 관리를 내부에서 직접 수행 (백엔드 연동 준비)
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const [totalItems, setTotalItems] = useState(0);
-
-    const itemsPerPage = 10; // 임시: 페이지 당 노출 갯수
-
-    // 데이터 패칭 함수 (API 연동 시 주석 해제 및 수정)
-    const fetchPaginationData = useCallback(async (_page: number) => {
-        try {
-            // TODO: 실제 API 연동 시 백엔드 엔드포인트에 맞게 URL 수정
-            // const response = await fetch(`/api/board/contents?page=${page}&limit=${itemsPerPage}`);
-            // const data = await response.json();
-            // setTotalPages(data.totalPages);
-            // setTotalItems(data.totalItems);
-
-            // 임시 모의 데이터
-            setTotalPages(25);
-            setTotalItems(248);
-        } catch (error) {
-            console.error("Failed to fetch pagination data:", error);
-        }
-    }, [itemsPerPage]);
-
-    // currentPage가 변결될 때마다 서버에서 데이터를 다시 가져옵니다.
-    useEffect(() => {
-        fetchPaginationData(currentPage);
-    }, [currentPage, fetchPaginationData]);
-
+export const Pagination: React.FC<PaginationProps> = ({ 
+    currentPage, 
+    totalPages, 
+    totalItems, 
+    onPageChange 
+}) => {
     const handlePageChange = (page: number) => {
         if (page >= 1 && page <= totalPages && page !== currentPage) {
-            setCurrentPage(page);
-            onPageChange?.(page);
+            onPageChange(page);
         }
     };
 
@@ -56,6 +34,7 @@ export const Pagination: React.FC<PaginationProps> = ({ onPageChange }) => {
     if (endPage - startPage < 4) {
         startPage = Math.max(1, endPage - 4);
     }
+    startPage = Math.max(1, startPage); // Ensure startPage is at least 1
 
     const pages = [];
     for (let i = startPage; i <= endPage; i++) {

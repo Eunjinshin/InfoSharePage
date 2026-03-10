@@ -13,18 +13,22 @@ interface CommentAuthor {
 export interface CommentReply {
     id: number;
     author: CommentAuthor;
-    timeAgo: string;
+    timeAgo?: string;
+    createdAt?: string;
     content: string;
-    likes: number;
+    likeCount?: number;
+    liked?: boolean;
     isAuthor: boolean;
 }
 
 export interface CommentData {
     id: number;
     author: CommentAuthor;
-    timeAgo: string;
+    timeAgo?: string;
+    createdAt?: string;
     content: string;
-    likes: number;
+    likeCount?: number;
+    liked?: boolean;
     isAuthor: boolean;
     replies: CommentReply[];
 }
@@ -32,9 +36,10 @@ export interface CommentData {
 interface DetailCommentsProps {
     comments: CommentData[];
     totalCount: number;
+    onCommentAdded?: () => void;  // 댓글 등록 후 목록 갱신 콜백
 }
 
-export const DetailComments: React.FC<DetailCommentsProps> = ({ comments, totalCount }) => {
+export const DetailComments: React.FC<DetailCommentsProps> = ({ comments, totalCount, onCommentAdded }) => {
     return (
         <section className="detail-comments-section">
             <div className="detail-comments-header">
@@ -43,12 +48,13 @@ export const DetailComments: React.FC<DetailCommentsProps> = ({ comments, totalC
             </div>
 
             {/* 댓글 작성 폼 */}
-            <DetailCommentForm />
+            <DetailCommentForm onCommentAdded={onCommentAdded} />
 
             {/* 댓글 목록 */}
             <DetailCommentsList
                 comments={comments}
                 totalCount={totalCount}
+                onCommentAdded={onCommentAdded}
             />
 
             {/* 댓글 더보기 버튼 */}

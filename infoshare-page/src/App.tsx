@@ -17,8 +17,9 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/board" element={<BoardPage />} />
-          <Route path="/detail" element={<DetailPage />} />
+          <Route path="/detail/:postId" element={<DetailPage />} />
           <Route path="/write" element={<WritePostPage />} />
+          <Route path="/edit/:postId" element={<WritePostPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>

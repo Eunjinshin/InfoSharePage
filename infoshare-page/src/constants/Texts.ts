@@ -1,5 +1,6 @@
 export const MAIN_TEXT = {
-    NO_CONTENTS: "No Contents"
+    NO_CONTENTS: "No Contents",
+    LOADING: "로딩 중..."
 };
 
 export const GUIDE = {
@@ -62,11 +63,20 @@ export const DETAIL_POST = {
     COMMENTS: "댓글"
 }
 
+export const DETAIL_AUTHOR_ACTIONS = {
+    EDIT: "수정",
+    DELETE: "삭제",
+    DELETING: "삭제 중...",
+    DELETE_CONFIRM: "정말로 이 게시글을 삭제하시겠습니까?",
+    DELETE_SUCCESS: "게시글이 삭제되었습니다."
+}
+
 export const COMMENT_FORM = {
     PLACEHOLDER: "댓글을 남겨주세요...",
     COMMENT_BTN: "댓글 작성",
     AUTHOR: "작성자",
-    REPLY: "답글"
+    REPLY: "답글",
+    LOAD_MORE: "댓글 더보기"
 }
 
 export const WRITE_POST = {
@@ -75,6 +85,7 @@ export const WRITE_POST = {
     FORM: {
         TITLE_LABEL: "게시글 제목",
         TITLE_PLACEHOLDER: "게시글 제목을 입력해주세요...",
+        CATEGORY_LABEL: "카테고리",
         CONTENT_LABEL: "내용",
         CONTENT_PLACEHOLDER: "무엇을 공유하고 싶으신가요? 마크다운이나 상단의 툴바를 사용해보세요...",
         TAGS_LABEL: "태그",

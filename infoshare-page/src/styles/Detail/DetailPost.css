@@ -152,3 +152,38 @@
     background-color: rgba(127, 29, 29, 0.2);
     /* red-900/20 */
 }
+
+/* ── 태그 섹션 ── */
+.detail-post-tags-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--slate-200, #e2e8f0);
+}
+
+/* "Tags" 라벨 행 */
+.detail-post-tags-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+/* "Tags" 라벨 아이콘 */
+.detail-post-tags-label .material-symbols-outlined {
+    font-size: 18px;
+    color: var(--slate-400, #94a3b8);
+}
+
+/* "Tags" 라벨 텍스트 */
+.detail-post-tags-label-text {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--slate-400, #94a3b8);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* 태그 칩 컨테이너 (category-tags-container의 marginBottom 리셋) */
+.detail-post-tags-chips {
+    margin-bottom: 0;
+}

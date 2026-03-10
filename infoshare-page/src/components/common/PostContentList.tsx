@@ -1,8 +1,11 @@
 import { MAIN_TEXT } from "../../constants/Texts";
 import { MaterialIcon } from "../../utils/MaterialIcon";
 import "../../styles/main/MainLatestPosts.css";
+import { Link } from "react-router-dom";
+import { Avatar } from "./Avatar";
 
 export interface PostList {
+    id?: number | string;
     avatar: string;
     name: string;
     timeAgo: string;
@@ -35,13 +38,11 @@ export const PostContentList: React.FC<PostListProps> = ({
     return (
         <div className="latest-posts-list">
             {displayPosts.map((postList, index) => (
-                <div key={index} className="latest-post-item">
+                <Link to={`/detail/${postList.id || index}`} key={index} className="latest-post-item" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <div className="latest-post-avatar-wrapper">
-                        <img
-                            alt={`${postList.name} avatar`}
-                            className="latest-post-avatar"
-                            src={postList.avatar}
-                        />
+                        <div className="latest-post-avatar" style={{ overflow: 'hidden', borderRadius: '50%' }}>
+                            <Avatar src={postList.avatar} alt={`${postList.name} avatar`} />
+                        </div>
                     </div>
                     <div className="latest-post-content">
                         <div className="latest-post-meta">
@@ -54,7 +55,7 @@ export const PostContentList: React.FC<PostListProps> = ({
                         <h4 className="latest-post-title">{postList.title}</h4>
                         <p className="latest-post-summary">{postList.summary}</p>
                     </div>
-                </div>
+                </Link>
             ))}
         </div>
     );
