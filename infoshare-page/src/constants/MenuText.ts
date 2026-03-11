@@ -34,6 +34,11 @@ export const CATEGORY_TEXT = {
         { icon: CATEGORY_ICONS.COMPUTER, text: "Tech" },
         { icon: CATEGORY_ICONS.NEWSPAPER, text: "News" },
         { icon: CATEGORY_ICONS.SCIENCE, text: "Science" },
-        { icon: CATEGORY_ICONS.DESIGN_SERVICES, text: "Design" }
+        { icon: CATEGORY_ICONS.DESIGN_SERVICES, text: "Design" },
+        { icon: CATEGORY_ICONS.COMPUTER, text: "IT" },
+        { icon: 'info', text: "Information" },
+        { icon: 'question_answer', text: "QnA" },
+        { icon: 'campaign', text: "Notice" },
+        { icon: 'forum', text: "Free" }
     ]
 };

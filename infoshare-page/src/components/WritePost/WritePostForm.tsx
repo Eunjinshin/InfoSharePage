@@ -11,10 +11,9 @@ import { useSubmitPost } from '../../hooks/useSubmitPost';
 import { Editor } from '@toast-ui/react-editor';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useFetch } from '../../hooks/useFetch';
-import { getPostDetailApi } from '../../api/getApiList';
+import { getPostDetailApi, getCategoriesApi } from '../../api/getApiList';
 import { useMutation } from '../../hooks/useMutation';
 import { updatePostApi } from '../../api/editApiList';
-import type { PostRequest } from '../../api/editApiList';
 import { API_ERROR } from '../../constants/AlertText';
 import { FILTER_TEXT } from '../../constants/FilterText';
 
@@ -39,12 +38,20 @@ export const WritePostForm: React.FC = () => {
         isEdit ? Number(postId) : 0
     );
 
+    // 카테고리 목록 가져오기 (이름 매핑용)
+    const { data: categories } = useFetch(getCategoriesApi);
+
     // 상세 데이터가 로딩되면 초기값 세팅
     useEffect(() => {
-        if (isEdit && postDetail) {
+        if (isEdit && postDetail && categories) {
             setTitle(postDetail.title || '');
-            // 카테고리 정보가 스트링으로 오면 Id 파싱이 필요할 수 있지만 일단 1로 고정하거나 맞춰줍니다.
-            // setCategoryId(postDetail.categoryId); 
+            
+            // 기존 카테고리 이름과 일치하는 ID를 찾아서 세팅합니다.
+            const matchingCategory = categories.find((c: any) => c.name === postDetail.category);
+            if (matchingCategory) {
+                setCategoryId(matchingCategory.id);
+            }
+            
             // setTags(postDetail.tags || []);
 
             // Toast Editor 내용 세팅
@@ -52,7 +59,7 @@ export const WritePostForm: React.FC = () => {
                 editorRef.current.getInstance().setHTML(postDetail.content || '');
             }
         }
-    }, [isEdit, postDetail]);
+    }, [isEdit, postDetail, categories]);
 
     // 생성 훅 (FormData)
     const { submitPost, isLoading: isSubmitLoading } = useSubmitPost();
@@ -67,16 +74,23 @@ export const WritePostForm: React.FC = () => {
 
     const handleSubmit = async () => {
         const contentHtml = editorRef.current?.getInstance().getHTML() || "";
+        
+        // 현재 선택된 categoryId를 기반으로 categories 배열에서 이름(name)을 찾습니다.
+        const selectedCategory = categories?.find((c: any) => c.id === categoryId);
+        const categoryName = selectedCategory ? selectedCategory.name : "Free";
 
         if (isEdit) {
-            // 게시글 수정 로직
+            // 게시글 수정 로직 (FormData 기반)
             try {
-                const postData: PostRequest = {
-                    title,
-                    content: contentHtml,
-                    categoryId,
-                };
-                await mutateEdit(Number(postId), postData);
+                const formData = new FormData();
+                formData.append("title", title);
+                formData.append("content", contentHtml);
+                formData.append("category", categoryName);
+                
+                // 태그 배열 서버 파싱에 맞게 append
+                tags.forEach(tag => formData.append("tags", tag));
+
+                await mutateEdit(Number(postId), formData);
                 alert("게시글이 성공적으로 수정되었습니다.");
                 navigate(`/detail/${postId}`);
             } catch (error: any) {
@@ -84,7 +98,7 @@ export const WritePostForm: React.FC = () => {
             }
         } else {
             // 게시글 작성 로직
-            submitPost(title, contentHtml, categoryId, tags);
+            submitPost(title, contentHtml, categoryName, tags);
         }
     };
 

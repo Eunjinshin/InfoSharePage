@@ -15,11 +15,21 @@ export const SocialLogin: React.FC = () => {
             </div>
 
             <div className="social-buttons">
-                <button className="social-btn">
+                {/* 
+                  * 소셜 로그인 버튼 클릭 시 백엔드의 OAuth2 인증 엔드포인트로 이동합니다.
+                  * 인증이 완료되면 OAuth2SuccessHandler를 통해 다시 프론트엔드로 리다이렉트 됩니다.
+                  */}
+                <button 
+                    className="social-btn"
+                    onClick={() => window.location.href = 'http://localhost:8080/oauth2/authorization/google'}
+                >
                     <GoogleIcon className="social-icon-img" />
                     <span>{LOGIN_TEXT.GOOGLE}</span>
                 </button>
-                <button className="social-btn">
+                <button 
+                    className="social-btn"
+                    onClick={() => window.location.href = 'http://localhost:8080/oauth2/authorization/apple'}
+                >
                     <AppleIcon className="social-icon-img" />
                     <span>{LOGIN_TEXT.APPLE}</span>
                 </button>

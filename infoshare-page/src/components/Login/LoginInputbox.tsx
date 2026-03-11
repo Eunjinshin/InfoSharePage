@@ -9,12 +9,14 @@ import { LOGIN_TEXT } from '../../constants/LoginText';
  */
 interface LoginInputBoxProps extends React.InputHTMLAttributes<HTMLInputElement> {
     icon: string;
+    label?: string;
     showForgotPassword?: boolean;
     isPassword?: boolean;
 }
 
 export const LoginInputbox: React.FC<LoginInputBoxProps> = ({
     icon,
+    label,
     showForgotPassword = false,
     isPassword = false,
     type,
@@ -29,14 +31,13 @@ export const LoginInputbox: React.FC<LoginInputBoxProps> = ({
 
     return (
         <div className="form-group">
-            {showForgotPassword ? (
-                <div className="form-group-header">
-                    <label>{LOGIN_TEXT.EMAIL}</label>
+            <div className="form-group-header">
+                {/* label prop이 있으면 사용하고, 없으면 기존 로직(EMAIL/PASSWORD) 유지 */}
+                <label>{label || (showForgotPassword ? LOGIN_TEXT.EMAIL : LOGIN_TEXT.PASSWORD)}</label>
+                {showForgotPassword && (
                     <a href="#" className="forgot-password">{LOGIN_TEXT.FORGOT_PASSWORD}</a>
-                </div>
-            ) : (
-                <label>{LOGIN_TEXT.PASSWORD}</label>
-            )}
+                )}
+            </div>
 
             <div className="input-wrapper">
                 <MaterialIcon icon={icon} className="input-icon" />

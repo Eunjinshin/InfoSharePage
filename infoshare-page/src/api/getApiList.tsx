@@ -52,7 +52,7 @@ export const getLatestPostsApi = async (limit: number = 5) => {
  */
 export const getCategoriesApi = async () => {
     try {
-        const response = await apiClient.get("/get/categories");
+        const response = await apiClient.get("/categories");
         return response.data;
     } catch (error) {
         console.error(API_ERROR.GET);
@@ -90,7 +90,7 @@ export const getCommentsApi = async (postId: number) => {
 /**
 * 7. 인기 태그 목록 추출 API
 */
-export const getPopularTagsApi = async (limit: number = 10) => {
+export const getPopularTagsApi = async (limit: number = 5) => {
     try {
         const response = await apiClient.get(`/get/tags/popular?limit=${limit}`);
         return response.data;

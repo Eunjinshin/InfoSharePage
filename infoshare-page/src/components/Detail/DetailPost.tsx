@@ -9,6 +9,8 @@ import { getPostDetailApi } from '../../api/getApiList';
 import { Avatar } from '../common/Avatar';
 import { useParams } from 'react-router-dom';
 import { useFetch } from '../../hooks/useFetch';
+import { BreadcrumbNavigation } from '../common/BreadcrumbNavigation';
+import { BREADCRUMB_NAV } from '../../constants/Texts';
 
 interface Author {
     name: string;
@@ -63,84 +65,96 @@ export const DetailPost: React.FC = () => {
     }
 
     return (
-        <article className="detail-post-article">
-            <div className="detail-post-content">
-                <h1 className="detail-post-title">
-                    {post.title}
-                </h1>
+        <>
+            <BreadcrumbNavigation
+                paths={[
+                    { name: BREADCRUMB_NAV.CATEGORIES, url: '/categories' },
+                    { 
+                        name: post.category || 'Free', 
+                        url: `/board?category=${encodeURIComponent(post.category || 'Free')}` 
+                    },
+                    { name: BREADCRUMB_NAV.POST_DETAIL }
+                ]}
+            />
+            <article className="detail-post-article">
+                <div className="detail-post-content">
+                    <h1 className="detail-post-title">
+                        {post.title}
+                    </h1>
 
-                <div className="detail-post-meta-container">
-                    <div className="detail-post-author-box">
-                        <div className="detail-post-avatar">
-                            <Avatar src={post.author.avatar} alt={`${post.author.name} avatar`} iconSize="24px" />
+                    <div className="detail-post-meta-container">
+                        <div className="detail-post-author-box">
+                            <div className="detail-post-avatar">
+                                <Avatar src={post.author.avatar} alt={`${post.author.name} avatar`} iconSize="24px" />
+                            </div>
+                            <div>
+                                <p className="detail-post-author-name">
+                                    {post.author.name}
+                                </p>
+                                <p className="detail-post-date">
+                                    {post.publishedAt}
+                                </p>
+                            </div>
                         </div>
-                        <div>
-                            <p className="detail-post-author-name">
-                                {post.author.name}
-                            </p>
-                            <p className="detail-post-date">
-                                {post.publishedAt}
-                            </p>
+
+                        <div className="detail-post-stats">
+                            <div className="detail-post-stat-item">
+                                <span className="material-symbols-outlined">
+                                    {DETAIL_ICONS.VIEW}
+                                </span>
+                                <span>{post.views}</span>
+                            </div>
+                            <div className="detail-post-stat-item">
+                                <span className="material-symbols-outlined">
+                                    {DETAIL_ICONS.CHAT_BUBBLE}
+                                </span>
+                                <span>{post.commentCount} {DETAIL_POST.COMMENTS}</span>
+                            </div>
+                            {/* 좋아요 수: 백엔드에서 받은 초기값 표시 */}
+                            <div className="detail-post-stat-item">
+                                <span className="material-symbols-outlined">
+                                    {DETAIL_ICONS.LIKE}
+                                </span>
+                                <span>{post.likeCount ?? 0}</span>
+                            </div>
                         </div>
                     </div>
+                    <div
+                        className="detail-post-body"
+                        dangerouslySetInnerHTML={{ __html: post.content }}
+                    />
 
-                    <div className="detail-post-stats">
-                        <div className="detail-post-stat-item">
-                            <span className="material-symbols-outlined">
-                                {DETAIL_ICONS.VIEW}
-                            </span>
-                            <span>{post.views}</span>
+                    {/* 태그 목록: 본문 아래 별도 섹션으로 표시 */}
+                    {post.tags && post.tags.length > 0 && (
+                        <div className="detail-post-tags-section">
+                            <div className="detail-post-tags-label">
+                                <span className="material-symbols-outlined">
+                                    label
+                                </span>
+                                <span className="detail-post-tags-label-text">
+                                    Tags
+                                </span>
+                            </div>
+                            <div className="category-tags-container detail-post-tags-chips">
+                                {post.tags.map((tag, idx) => (
+                                    <div key={idx} className="category-tag">
+                                        #{tag}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        <div className="detail-post-stat-item">
-                            <span className="material-symbols-outlined">
-                                {DETAIL_ICONS.CHAT_BUBBLE}
-                            </span>
-                            <span>{post.commentCount} {DETAIL_POST.COMMENTS}</span>
-                        </div>
-                        {/* 좋아요 수: 백엔드에서 받은 초기값 표시 */}
-                        <div className="detail-post-stat-item">
-                            <span className="material-symbols-outlined">
-                                {DETAIL_ICONS.LIKE}
-                            </span>
-                            <span>{post.likeCount ?? 0}</span>
-                        </div>
-                    </div>
+                    )}
+
+                    <DetailPostButton 
+                        post={post} 
+                        initialLikeCount={post.likeCount ?? 0} 
+                        initialLiked={post.liked ?? false} 
+                    />
+                    {post.isAuthor !== false && (
+                        <DetailPostAuthorActions postId={post.id || postId} />
+                    )}
                 </div>
-                <div
-                    className="detail-post-body"
-                    dangerouslySetInnerHTML={{ __html: post.content }}
-                />
-
-                {/* 태그 목록: 본문 아래 별도 섹션으로 표시 */}
-                {post.tags && post.tags.length > 0 && (
-                    <div className="detail-post-tags-section">
-                        <div className="detail-post-tags-label">
-                            <span className="material-symbols-outlined">
-                                label
-                            </span>
-                            <span className="detail-post-tags-label-text">
-                                Tags
-                            </span>
-                        </div>
-                        <div className="category-tags-container detail-post-tags-chips">
-                            {post.tags.map((tag, idx) => (
-                                <div key={idx} className="category-tag">
-                                    #{tag}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
-
-                <DetailPostButton 
-                    post={post} 
-                    initialLikeCount={post.likeCount ?? 0} 
-                    initialLiked={post.liked ?? false} 
-                />
-                {post.isAuthor !== false && (
-                    <DetailPostAuthorActions postId={post.id || postId} />
-                )}
-            </div>
-        </article>
+            </article>
+        </>
     );
 };

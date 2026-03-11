@@ -44,6 +44,12 @@
     }
 }
 
+@media (min-width: 1024px) {
+    .popular-posts-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
 .popular-post-card {
     display: flex;
     flex-direction: column;

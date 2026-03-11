@@ -23,7 +23,13 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
                 <p className="signup-prompt">
                     {LOGIN_TEXT.SIGNUP_PROMPT}{' '}
-                    <a href="#" className="signup-link">{LOGIN_TEXT.SIGNUP_LINK}</a>
+                    <span 
+                        className="signup-link" 
+                        onClick={() => window.location.href = '/signup'} 
+                        style={{cursor: 'pointer'}}
+                    >
+                        {LOGIN_TEXT.SIGNUP_LINK}
+                    </span>
                 </p>
             </div>
         </main>

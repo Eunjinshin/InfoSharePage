@@ -33,7 +33,8 @@ export const PostContentList: React.FC<PostListProps> = ({
         );
     }
 
-    const displayPosts = postList.slice(0, 3);
+    //최대 5개까지만 출력 (사이드바가 없어져 넓어진 공간 고려)
+    const displayPosts = postList.slice(0, 5);
 
     return (
         <div className="latest-posts-list">

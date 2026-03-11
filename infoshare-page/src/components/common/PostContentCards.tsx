@@ -30,8 +30,8 @@ export const PostContentCards: React.FC<PostContentCardsProps> = ({ postCards })
         );
     }
 
-    //최대 2개까지만 출력
-    const displayPosts = postCards.slice(0, 2);
+    //최대 4개까지만 출력 (사이드바가 없어져서 넓은 영역 활용)
+    const displayPosts = postCards.slice(0, 4);
 
     return (
         <div className="popular-posts-grid">

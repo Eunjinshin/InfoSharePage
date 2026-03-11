@@ -22,7 +22,7 @@ export const BoardTitle: React.FC<BoardTitleProps> = ({ category }) => {
     return (
         <div className="board-header">
             <BreadcrumbNavigation paths={[
-                { name: BREADCRUMB_NAV.CATEGORIES, url: '/board' },
+                { name: BREADCRUMB_NAV.CATEGORIES, url: '/categories' },
                 { name: CategoryInfo.title }
             ]} />
 
