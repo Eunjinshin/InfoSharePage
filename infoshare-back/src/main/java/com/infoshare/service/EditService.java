@@ -33,11 +33,12 @@ public class EditService {
     @Transactional
     public EditResponse editPost(Long id, EditRequest request) {
 
-        // 1. 게시글 수정 (제목, 내용)
+        // 1. 게시글 수정 (제목, 내용, 카테고리)
         Post post = Post.builder()
                 .id(id)
                 .title(request.getTitle())
                 .content(request.getContent())
+                .category(request.getCategory())
                 .build();
 
         postMapper.updatePost(post);

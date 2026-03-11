@@ -12,6 +12,7 @@ import lombok.Setter;
 public class EditRequest {
     private String title;
     private String content;
+    private String category;
     private List<String> tags;
     private List<MultipartFile> files;
 

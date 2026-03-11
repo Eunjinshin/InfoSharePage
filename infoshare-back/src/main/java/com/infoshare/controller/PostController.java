@@ -46,7 +46,7 @@ public class PostController {
      */
     @PostMapping("/{postId}/likes")
     public ResponseEntity<com.infoshare.dto.response.LikeResponse> togglePostLike(
-            @org.springframework.web.bind.annotation.PathVariable Long postId,
+            @org.springframework.web.bind.annotation.PathVariable("postId") Long postId,
             jakarta.servlet.http.HttpServletRequest request) {
         String userIp = request.getRemoteAddr();
         com.infoshare.dto.response.LikeResponse response = postService.togglePostLike(postId, userIp);
@@ -58,7 +58,7 @@ public class PostController {
      */
     @PostMapping("/comment/{commentId}/likes")
     public ResponseEntity<com.infoshare.dto.response.LikeResponse> toggleCommentLike(
-            @org.springframework.web.bind.annotation.PathVariable Long commentId,
+            @org.springframework.web.bind.annotation.PathVariable("commentId") Long commentId,
             jakarta.servlet.http.HttpServletRequest request) {
         String userIp = request.getRemoteAddr();
         com.infoshare.dto.response.LikeResponse response = postService.toggleCommentLike(commentId, userIp);

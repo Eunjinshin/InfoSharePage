@@ -29,13 +29,14 @@ public class SearchService {
      * @return 페이징된 검색 결과
      */
     @Transactional(readOnly = true)
-    public SearchResponseDto<SearchPostResponse> searchPosts(int page, int size, String keyword) {
+    public SearchResponseDto<SearchPostResponse> searchPosts(int page, int size, String keyword, String category) {
         try {
             // 기존 0-based PageRequestDto를 활용하기 위해 page - 1 변환
             PageRequestDto request = new PageRequestDto();
             request.setPage(Math.max(0, page - 1));
             request.setSize(size);
             request.setKeyword(keyword);
+            request.setCategory(category);
             request.setSort("latest"); // 기본적으로 최신순 정렬
 
             long totalElements = getMapper.countPosts(request);

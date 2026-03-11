@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.infoshare.repository.CategoryMapper">
+
+    <select id="getAllCategories" resultType="com.infoshare.domain.Category">
+        SELECT id, name, created_at AS createdAt
+        FROM categories
+        ORDER BY id ASC
+    </select>
+
+</mapper>

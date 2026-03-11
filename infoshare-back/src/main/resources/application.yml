@@ -27,3 +27,20 @@ server:
 
 file:
   upload-dir: C:/infoshare_uploads/
+
+jwt:
+  secret: infoshare-key-for-jwt-token-authentication-key-min-256-bits-super-long
+
+# OAuth2 설정
+# 실제 보안 키는 application-secret.yml (Git 제외)에서 관리합니다.
+spring:
+  config:
+    import: "optional:classpath:application-secret.yml"
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: "mock-client-id"
+            client-secret: "mock-client-secret"
+            scope: "profile,email"
