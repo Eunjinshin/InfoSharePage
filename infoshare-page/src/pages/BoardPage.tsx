@@ -21,22 +21,27 @@ import { MAIN_TEXT } from '../constants/Texts';
 export const BoardPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
-    // URL에서 keyword 파라미터를 읽어옵니다. (없으면 빈 문자열)
+    // URL에서 keyword, category 파라미터를 읽어옵니다. (없으면 빈 문자열)
     const initialKeyword = searchParams.get('keyword') || '';
+    const initialCategory = searchParams.get('category') || '';
 
     // 상태 관리: 현재 페이지, 검색어, 그리고 선택된 필터
     const [page, setPage] = useState<number>(1);
     const [keyword, setKeyword] = useState<string>(initialKeyword);
+    const [category, setCategory] = useState<string>(initialCategory);
     const [activeFilter, setActiveFilter] = useState<FilterType>('All Posts');
     const size = 10; // 기본 페이지 사이즈
 
-    // URL의 keyword 파라미터가 변경되면 상태를 동기화합니다.
+    // URL의 파라미터가 변경되면 상태를 동기화합니다.
     useEffect(() => {
         const urlKeyword = searchParams.get('keyword') || '';
-        if (urlKeyword !== keyword) {
+        const urlCategory = searchParams.get('category') || '';
+
+        if (urlKeyword !== keyword || urlCategory !== category) {
             setKeyword(urlKeyword);
-            setPage(1); // 검색어 변경 시 첫 페이지로 리셋
-            setActiveFilter('All Posts'); // 검색 시 전체 게시글 필터로 변경
+            setCategory(urlCategory);
+            setPage(1); // 조건 변경 시 첫 페이지로 리셋
+            setActiveFilter('All Posts'); // 검색/카테고리 선택 시 전체 게시글 필터로 변경
         }
     }, [searchParams]);
 
@@ -57,7 +62,8 @@ export const BoardPage = () => {
         targetApi,
         isSearchMode ? page : undefined,
         isSearchMode ? size : undefined,
-        isSearchMode ? keyword : undefined
+        isSearchMode ? keyword : undefined,
+        isSearchMode ? category : undefined
     );
 
     // 검색어 변경 핸들러
@@ -113,7 +119,7 @@ export const BoardPage = () => {
 
     return (
         <main className="board-page-main">
-            <BoardTitle category="General Discussion" />
+            <BoardTitle category={category || "General Discussion"} />
 
             <BoardContentsFilter
                 onSearch={handleSearch}

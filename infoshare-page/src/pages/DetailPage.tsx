@@ -3,16 +3,12 @@ import '../styles/pages/DetailPage.css';
 import { DetailPost } from '../components/Detail/DetailPost';
 import { DetailComments } from '../components/Detail/DetailComments';
 import { WritePostButton } from '../components/common/WritePostButton';
-import { BreadcrumbNavigation } from '../components/common/BreadcrumbNavigation';
-import { BREADCRUMB_NAV } from '../constants/Texts';
-
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { getCommentsApi } from '../api/getApiList';
 import { useFetch } from '../hooks/useFetch';
 
 export const DetailPage: React.FC = () => {
     const { postId } = useParams<{ postId: string }>();
-    const navigate = useNavigate();
 
     // 댓글 목록 가져오기
     const fetchComments = React.useCallback(async (id: number) => {
@@ -32,13 +28,6 @@ export const DetailPage: React.FC = () => {
     return (
         <main className="detail-page-main">
             <div className="detail-content-container">
-
-                <BreadcrumbNavigation
-                    paths={[
-                        { name: BREADCRUMB_NAV.CATEGORIES, action: () => navigate(-1) },
-                        { name: BREADCRUMB_NAV.POST_DETAIL }
-                    ]}
-                />
 
                 <DetailPost />
 

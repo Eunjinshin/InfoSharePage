@@ -12,12 +12,16 @@ import apiClient from "./apiClient";
     * @return 게시글 검색 결과 데이터 및 메타 정보
     */
 
-export const searchPostsApi = async (page: number = 1, size: number = 10, keyword: string) => {
+export const searchPostsApi = async (page: number = 1, size: number = 10, keyword: string = '', category: string = '') => {
     try {
-        const response = await apiClient.get(`/search/posts?page=${page}&size=${size}&keyword=${keyword}`);
+        let url = `/search/posts?page=${page}&size=${size}`;
+        if (keyword) url += `&keyword=${encodeURIComponent(keyword)}`;
+        if (category) url += `&category=${encodeURIComponent(category)}`;
+
+        const response = await apiClient.get(url);
         return response.data;
     } catch (error) {
-        console.error(API_ERROR.POST.ERROR);
-        throw new Error(API_ERROR.POST.ERROR);
+        console.error(API_ERROR.GET);
+        throw new Error(API_ERROR.GET);
     }
 }

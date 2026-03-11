@@ -1,6 +1,7 @@
 export const LOGIN_TEXT = {
     EMAIL: "이메일 또는 아이디",
     PASSWORD: "비밀번호",
+    NAME: "이름",
     FORGOT_PASSWORD: "비밀번호를 잊으셨나요?",
     REMEMBER_ME: "30일 동안 기억하기",
     SUBMIT: "로그인",
@@ -13,6 +14,10 @@ export const LOGIN_TEXT = {
     SUBTITLE: "정보 공유 커뮤니티에 접속하려면 로그인하세요",
     SIGNUP_PROMPT: "계정이 없으신가요?",
     SIGNUP_LINK: "무료로 가입하기",
+    ERROR_MESSAGE: "모든 필드를 입력해주세요.",
+    SIGNUP_SUCCESS: "회원가입이 완료되었습니다. 로그인해주세요.",
+    SIGNUP_ERROR: "회원가입 중 오류가 발생했습니다.",
+    JOIN: "회원가입",
 
 }
 
@@ -20,4 +25,6 @@ export const LOGIN_ICON = {
     EMAIL: "mail",
     PASSWORD: "lock",
     VISIBILITY: "visibility",
+    USER: "person",
+    KEY: "key",
 }

@@ -4,6 +4,7 @@ import { MaterialIcon } from '../../utils/MaterialIcon';
 import { CATEGORY_TEXT } from '../../constants/MenuText';
 import { getPopularTagsApi } from '../../api/getApiList';
 import { useFetch } from '../../hooks/useFetch';
+import { useNavigate } from 'react-router-dom';
 
 interface TagData {
     name: string;
@@ -12,28 +13,38 @@ interface TagData {
 }
 
 export const CategoryTags: React.FC = () => {
+    const navigate = useNavigate();
     // 인기 태그 API 연동 (limit 5개로 요청)
     const { data: popularTags, isLoading, error } = useFetch(getPopularTagsApi, 5);
 
     if (isLoading) return <div className="category-tags-container">Loading tags...</div>;
     if (error) return <div className="category-tags-container">Failed to load tags.</div>;
 
-    // API에서 태그 목록을 배열 형태로 줬다고 가정: [{ name: 'React' }, { name: 'Spring' }, ...]
-    const tags = Array.isArray(popularTags) ? popularTags : [];
+    // API에서 태그 목록을 배열 형태로 줬다고 가정: { data: [{ name: 'React' }, ...] }
+    const tags = Array.isArray(popularTags?.data) ? popularTags.data : [];
 
     // 태그가 없을 경우 기본값 노출 (선택사항)
     const displayTags = tags.length > 0 ? tags : CATEGORY_TEXT.CATEGORIES.map(c => ({ name: c.text }));
 
+    const handleTagClick = (tagName: string) => {
+        navigate(`/board?keyword=${encodeURIComponent(tagName)}`);
+    };
+
     return (
         <div className="category-tags-container">
             {displayTags.map((tag: TagData | any, index: number) => (
-                <div key={index} className="category-tag">
+                <div 
+                    key={index} 
+                    className="category-tag" 
+                    onClick={() => handleTagClick(tag.name || tag.text)}
+                    style={{ cursor: 'pointer' }}
+                >
                     {/* 서버 태그에 아이콘이 없으면 기본 태그 아이콘 노출 */}
                     <MaterialIcon
                         icon={tag.icon || "tag"}
                         className="category-tag-icon"
                     />
-                    #{tag.name || tag.text}
+                    {tag.name || tag.text}
                 </div>
             ))}
         </div>

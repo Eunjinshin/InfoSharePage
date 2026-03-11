@@ -24,27 +24,14 @@
 }
 
 .main-grid-layout {
-    display: grid;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
-    /* gap-8 */
-}
-
-@media (min-width: 1024px) {
-    .main-grid-layout {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
 }
 
 .main-left-column {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    /* space-y-8 */
-}
-
-@media (min-width: 1024px) {
-    .main-left-column {
-        grid-column: span 2 / span 2;
-    }
+    width: 100%;
 }

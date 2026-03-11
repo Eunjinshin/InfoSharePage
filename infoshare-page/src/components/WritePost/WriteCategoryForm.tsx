@@ -1,6 +1,12 @@
 import React from 'react';
 import { WRITE_POST } from '../../constants/Texts';
-import { CATEGORY_TEXT } from '../../constants/MenuText';
+import { getCategoriesApi } from '../../api/getApiList';
+import { useFetch } from '../../hooks/useFetch';
+
+interface CategoryData {
+    id: number;
+    name: string;
+}
 
 export interface WriteCategoryFormProps {
     categoryId: number;
@@ -8,6 +14,8 @@ export interface WriteCategoryFormProps {
 }
 
 export const WriteCategoryForm: React.FC<WriteCategoryFormProps> = ({ categoryId, setCategoryId }) => {
+    // 서버에서 카테고리 목록을 가져옵니다.
+    const { data: categories, isLoading } = useFetch(getCategoriesApi);
     return (
         <div className="write-post-form-group">
             <label className="write-post-form-label">
@@ -17,13 +25,17 @@ export const WriteCategoryForm: React.FC<WriteCategoryFormProps> = ({ categoryId
                 className="write-post-input-tags write-post-select-category"
                 value={categoryId}
                 onChange={(e) => setCategoryId(Number(e.target.value))}
+                disabled={isLoading || !categories || categories.length === 0}
             >
-                {CATEGORY_TEXT.CATEGORIES.map((category, index) => (
-                    // index + 1을 value로 사용하여 카테고리 ID를 넘깁니다.
-                    <option key={index + 1} value={index + 1}>
-                        {category.text}
-                    </option>
-                ))}
+                {isLoading ? (
+                    <option value={0}>로딩 중...</option>
+                ) : (
+                    categories?.map((category: CategoryData) => (
+                        <option key={category.id} value={category.id}>
+                            {category.name}
+                        </option>
+                    ))
+                )}
             </select>
         </div>
     );

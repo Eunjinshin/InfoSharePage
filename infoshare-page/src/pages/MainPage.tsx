@@ -3,7 +3,6 @@ import { MainTitleBarSection } from '../components/main/MainTitleBarSection';
 import { CategoryTags } from '../components/common/CategoryTags';
 import { MainPopularPosts } from '../components/main/MainPopularPosts';
 import { MainLatestPosts } from '../components/main/MainLatestPosts';
-import { Sidebar } from './Sidebar';
 import '../styles/pages/MainPage.css';
 import { WritePostButton } from '../components/common/WritePostButton';
 
@@ -18,7 +17,7 @@ export const MainPage: React.FC = () => {
                     <MainPopularPosts />
                     <MainLatestPosts />
                 </div>
-                <Sidebar />
+                {/* <Sidebar /> */}
             </div>
             <WritePostButton />
         </main>

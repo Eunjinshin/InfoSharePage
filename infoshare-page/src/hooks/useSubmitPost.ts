@@ -9,15 +9,16 @@ export const useSubmitPost = () => {
     const navigate = useNavigate();
 
     // 여러 개의 상태를 파라미터로 받아서 실행하는 함수
-    const submitPost = async (title: string, content: string, categoryId: number, tags: string[] = []) => {
+    const submitPost = async (title: string, content: string, categoryName: string, tags: string[] = []) => {
         try {
             const formData = new FormData();
 
             // 💡 백엔드에서 @ModelAttribute 파라미터를 사용하기 때문에
             // JSON Blob 형태가 아닌, 폼 필드 각각의 값으로 전송해야 스프링이 제대로 인식합니다.
             formData.append("title", title);
-            formData.append("content", content); // 에디터 내용 연동됨
-            formData.append("categoryId", String(categoryId));
+            // 백엔드에는 id가 아닌 카테고리 이름을 문자열로 전송합니다
+            formData.append("category", categoryName);
+            formData.append("content", content); // 복구
 
             // 태그 배열을 전송 (스프링 컨버터에 맞게 여러개의 tags 필드로 전송)
             tags.forEach(tag => formData.append("tags", tag));

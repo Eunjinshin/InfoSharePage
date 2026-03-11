@@ -3,7 +3,7 @@
  * @description 화면 우측 하단에 고정된 떠 있는 글쓰기(Write Post) 플로팅 버튼 컴포넌트입니다.
  */
 
-import React from 'react';
+import '../../styles/components/WritePostButton.css';
 import '../../styles/components/WritePostButton.css';
 import { WRITE_POST_BUTTON } from '../../constants/Texts';
 import { BOARD_ICONS } from '../../constants/Icons';
