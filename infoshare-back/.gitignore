@@ -1,5 +1,6 @@
 HELP.md
 target/
+bin/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -53,3 +54,6 @@ build/
 ### OS/Environment ###
 .DS_Store
 Thumbs.db
+
+### Secrets ###
+**/application-secret.yml

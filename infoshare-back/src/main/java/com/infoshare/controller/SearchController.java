@@ -30,11 +30,12 @@ public class SearchController {
      */
     @GetMapping("/posts")
     public ResponseEntity<SearchResponseDto<SearchPostResponse>> searchPosts(
-            @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @RequestParam(required = false) String keyword) {
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size,
+            @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(value = "category", required = false) String category) {
 
-        SearchResponseDto<SearchPostResponse> response = searchService.searchPosts(page, size, keyword);
+        SearchResponseDto<SearchPostResponse> response = searchService.searchPosts(page, size, keyword, category);
         return ResponseEntity.ok(response);
     }
 }

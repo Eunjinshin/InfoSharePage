@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.infoshare.mapper.MemberMapper">
+
+    <insert id="insertMember" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO members (username, email, password, name, social_provider, role, created_at)
+        VALUES (#{username}, #{email}, #{password}, #{name}, #{socialProvider}, #{role}, NOW())
+    </insert>
+
+    <select id="findByUsername" resultType="Member">
+        SELECT *
+        FROM members
+        WHERE username = #{username}
+    </select>
+
+    <select id="findByEmail" resultType="Member">
+        SELECT *
+        FROM members
+        WHERE email = #{email}
+    </select>
+
+    <select id="countByUsername" resultType="int">
+        SELECT COUNT(*)
+        FROM members
+        WHERE username = #{username}
+    </select>
+
+    <select id="countByEmail" resultType="int">
+        SELECT COUNT(*)
+        FROM members
+        WHERE email = #{email}
+    </select>
+
+</mapper>

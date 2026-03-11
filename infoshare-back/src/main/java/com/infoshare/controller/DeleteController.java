@@ -28,7 +28,7 @@ public class DeleteController {
      * @return 삭제 완료 메시지
      */
     @DeleteMapping("/posts/{postId}")
-    public ResponseEntity<Map<String, String>> deletePost(@PathVariable Long postId) {
+    public ResponseEntity<Map<String, String>> deletePost(@PathVariable("postId") Long postId) {
         deleteService.deletePost(postId);
 
         Map<String, String> response = new HashMap<>();
@@ -45,7 +45,7 @@ public class DeleteController {
      * @return 삭제 완료 메시지
      */
     @DeleteMapping("/comments/{commentId}")
-    public ResponseEntity<Map<String, String>> deleteComment(@PathVariable Long commentId) {
+    public ResponseEntity<Map<String, String>> deleteComment(@PathVariable("commentId") Long commentId) {
         deleteService.deleteComment(commentId);
 
         Map<String, String> response = new HashMap<>();

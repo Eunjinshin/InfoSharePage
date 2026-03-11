@@ -33,7 +33,7 @@ public class EditController {
      * @return
      */
     @PutMapping("/{id}")
-    public ResponseEntity<EditResponse> editPost(@PathVariable Long id, @ModelAttribute EditRequest request) {
+    public ResponseEntity<EditResponse> editPost(@PathVariable("id") Long id, @ModelAttribute EditRequest request) {
         EditResponse response = editService.editPost(id, request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
@@ -47,7 +47,7 @@ public class EditController {
      */
     @PutMapping("/comments/{commentId}")
     public ResponseEntity<Map<String, String>> editComment(
-            @PathVariable Long commentId,
+            @PathVariable("commentId") Long commentId,
             @RequestBody CommentUpdateRequest request) {
         editService.editComment(commentId, request);
 

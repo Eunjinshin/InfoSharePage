@@ -40,7 +40,7 @@ public class GetController {
      */
     @GetMapping("/popular")
     public ResponseEntity<List<MainPostResponse>> getPopularPosts(
-            @RequestParam int limit) {
+            @RequestParam("limit") int limit) {
         List<MainPostResponse> response = getService.getPopularPosts(limit);
         return ResponseEntity.ok(response);
     }
@@ -50,7 +50,7 @@ public class GetController {
      */
     @GetMapping("/latest")
     public ResponseEntity<List<MainPostResponse>> getLatestPosts(
-            @RequestParam int limit) {
+            @RequestParam("limit") int limit) {
         List<MainPostResponse> response = getService.getLatestPosts(limit);
         return ResponseEntity.ok(response);
     }
@@ -69,7 +69,7 @@ public class GetController {
      */
     @GetMapping("/detail/{postId}")
     public ResponseEntity<DetailResponse> getPostDetail(
-            @PathVariable Long postId,
+            @PathVariable("postId") Long postId,
             jakarta.servlet.http.HttpServletRequest request) {
         String userIp = request.getRemoteAddr();
         DetailResponse response = getService.getPostDetail(postId, userIp);
@@ -81,7 +81,7 @@ public class GetController {
      */
     @GetMapping("/comments/{postId}")
     public ResponseEntity<List<CommentTreeResponse>> getComments(
-            @PathVariable Long postId,
+            @PathVariable("postId") Long postId,
             jakarta.servlet.http.HttpServletRequest request) {
         String userIp = request.getRemoteAddr();
         List<CommentTreeResponse> response = getService.getCommentTree(postId, userIp);
@@ -93,7 +93,7 @@ public class GetController {
      */
     @GetMapping("/tags/popular")
     public ResponseEntity<com.infoshare.common.dto.DataResponseDto<com.infoshare.dto.response.PopularTagResponse>> getPopularTags(
-            @RequestParam(defaultValue = "10") int limit) {
+            @RequestParam(value = "limit", defaultValue = "10") int limit) {
         List<com.infoshare.dto.response.PopularTagResponse> tags = getService.getPopularTags(limit);
         com.infoshare.common.dto.DataResponseDto<com.infoshare.dto.response.PopularTagResponse> response = new com.infoshare.common.dto.DataResponseDto<>(
                 tags);
