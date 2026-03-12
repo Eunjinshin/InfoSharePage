@@ -26,8 +26,8 @@ jobs:
     # 2. 프론트엔드 빌드 결과물을 백엔드로 복사 (통합)
     - name: Copy Frontend build to Backend
       run: |
-        mkdir -p infoshare-back/src/main/resources/static
-        cp -r infoshare-page/dist/* infoshare-back/src/main/resources/static/
+        mkdir -p infoshare-back/src/main/webapp
+        cp -r infoshare-page/dist/* infoshare-back/src/main/webapp/
 
     # 3. Java 설정 및 백엔드 빌드
     - name: Set up JDK 17
