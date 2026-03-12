@@ -62,11 +62,13 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          # 경로가 /opt/tomcat10/webapps 로 바뀝니다!
+          # 경로를 /opt/tomcat10으로 변경
           sudo rm -rf /opt/tomcat10/webapps/ROOT
           sudo rm -f /opt/tomcat10/webapps/ROOT.war
           
+          # 배포 폴더에서 최신 WAR 복사
           WAR_FILE=$(ls -t /home/ubuntu/deploy/*.war | grep -v "plain" | head -n 1)
           sudo cp "$WAR_FILE" /opt/tomcat10/webapps/ROOT.war
           
+          # 톰캣 10 서비스 재시작
           sudo systemctl restart tomcat10
