@@ -54,7 +54,7 @@ jobs:
         target: "/home/ubuntu/deploy"
         strip_components: 3
 
-# 5. 서버 배포 (경로 수정 버전)
+# 5. 서버 배포 및 보안 설정 주입
     - name: Deploy to Tomcat 10
       uses: appleboy/ssh-action@v0.1.10
       with:
@@ -62,13 +62,30 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          # 경로를 /opt/tomcat10으로 변경
+          # 1. 보안 설정 폴더 생성 및 설정 파일 쓰기 (GitHub Secrets 활용)
+          sudo mkdir -p /opt/tomcat10/conf/secrets
+          sudo chown ubuntu:ubuntu /opt/tomcat10/conf/secrets
+          
+          cat <<EOF > /opt/tomcat10/conf/secrets/application-secret.yml
+          spring:
+            security:
+              oauth2:
+                client:
+                  registration:
+                    google:
+                      client-id: "${{ secrets.GOOGLE_CLIENT_ID }}"
+                      client-secret: "${{ secrets.GOOGLE_CLIENT_SECRET }}"
+          EOF
+          
+          # 권한 제한 (나만 읽을 수 있게)
+          chmod 600 /opt/tomcat10/conf/secrets/application-secret.yml
+
+          # 2. 기존 배포물 교체
           sudo rm -rf /opt/tomcat10/webapps/ROOT
           sudo rm -f /opt/tomcat10/webapps/ROOT.war
           
-          # 배포 폴더에서 최신 WAR 복사
           WAR_FILE=$(ls -t /home/ubuntu/deploy/*.war | grep -v "plain" | head -n 1)
           sudo cp "$WAR_FILE" /opt/tomcat10/webapps/ROOT.war
           
-          # 톰캣 10 서비스 재시작
+          # 3. 톰캣 10 재시작
           sudo systemctl restart tomcat10
