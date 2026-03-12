@@ -1,43 +1,16 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/infoshare?serverTimezone=UTC&characterEncoding=UTF-8
     username: root
     password: "0000"
   sql:
     init:
-      mode: never # 앱 실행 시 schema.sql 파일 실행 (나중엔 never 혹은 지우기) 
-      encoding: UTF-8
-  output:
-    ansi:
-      enabled: ALWAYS
+      mode: always
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
-
-mybatis:
-  mapper-locations: classpath:mapper/**/*.xml
-  type-aliases-package: com.infoshare.domain
-  configuration:
-    map-underscore-to-camel-case: true
-
-server:
-  servlet:
-    encoding:
-      charset: UTF-8
-      enabled: true
-      force: true
-
-file:
-  upload-dir: /home/ubuntu/infoshare_uploads/ # 리눅스 경로로 수정
-
-jwt:
-  secret: infoshare-key-for-jwt-token-authentication-key-min-256-bits-super-long
-
-# OAuth2 설정
-# 실제 보안 키는 application-secret.yml (Git 제외)에서 관리합니다.
-spring:
+  # 아래쪽에 있던 spring 항목들을 위쪽 spring 블록 안으로 들여쓰기해서 합칩니다.
   config:
     import: "optional:classpath:application-secret.yml"
   security:
@@ -48,3 +21,8 @@ spring:
             client-id: "mock-client-id"
             client-secret: "mock-client-secret"
             scope: "profile,email"
+
+# spring과 상관없는 설정들은 따로 둡니다.
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  ...
