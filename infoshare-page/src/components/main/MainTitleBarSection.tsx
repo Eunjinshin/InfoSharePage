@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/Main/MainTitleBarSection.css';
+import '../../styles/main/MainTitleBarSection.css';
 import { TITLE_BAR } from '../../constants/Texts';
 import titleBgImage from '../../assets/backgroundImages/title-bar-bg.png';
 import { SearchBar } from '../common/SearchBar';
