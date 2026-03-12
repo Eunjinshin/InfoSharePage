@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Vite에서는 환경변수를 import.meta.env 로 가져와야 합니다. (REACT_APP_ 대신 VITE_ 접두사 사용)
-const API_BASE_URL = import.meta.env.VITE_API_URL;
+//const API_BASE_URL = import.meta.env.VITE_API_URL;
 const default_header = {
     'Content-Type': 'application/json',
 }
