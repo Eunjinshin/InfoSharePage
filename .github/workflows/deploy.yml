@@ -42,7 +42,7 @@ jobs:
         target: "/home/ubuntu/deploy"
         strip_components: 3
 
-    # 4. 서버 배포 실행
+# 4. 서버 배포 실행 (수정 버전)
     - name: Deploy to Tomcat
       uses: appleboy/ssh-action@v0.1.10
       with:
@@ -51,13 +51,21 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           mkdir -p /home/ubuntu/deploy
+          
+          # 1. 기존 ROOT 삭제
           sudo rm -rf /var/lib/tomcat9/webapps/ROOT
           sudo rm -f /var/lib/tomcat9/webapps/ROOT.war
-          # 배포 폴더에 파일이 있는지 확인 후 복사
-          if [ -f /home/ubuntu/deploy/*.war ]; then
-            sudo cp /home/ubuntu/deploy/*.war /var/lib/tomcat9/webapps/ROOT.war
+          
+          # 2. plain이 붙지 않은 순수한 .war 파일 하나만 찾아서 ROOT.war로 복사
+          # (파일이 여러 개일 때 생기는 오류를 방지하기 위해 가장 최신 파일 하나만 타격)
+          WAR_FILE=$(ls -t /home/ubuntu/deploy/*.war | grep -v "plain" | head -n 1)
+          
+          if [ -n "$WAR_FILE" ]; then
+            echo "Deploying: $WAR_FILE"
+            sudo cp "$WAR_FILE" /var/lib/tomcat9/webapps/ROOT.war
             sudo systemctl restart tomcat9
+            echo "Deployment successful!"
           else
-            echo "WAR file not found!"
+            echo "Error: Executable WAR file not found!"
             exit 1
           fi
