@@ -1,0 +1,49 @@
+name: Java CI with Gradle and Deploy to OCI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      working-directory: ./infoshare-back # 👈 백엔드 폴더로 지정
+
+    - name: Build with Gradle
+      run: ./gradlew clean build
+      working-directory: ./infoshare-back # 👈 백엔드 폴더로 지정
+
+    - name: Deliver WAR file via SCP
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        host: ${{ secrets.REMOTE_IP }}
+        username: ${{ secrets.REMOTE_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        # 빌드 결과물 경로도 폴더 구조에 맞게 수정
+        source: "infoshare-back/build/libs/*.war"
+        target: "/home/ubuntu/deploy"
+        strip_components: 3 # 폴더 깊이에 따라 조절 (infoshare-back/build/libs -> 3개 제거)
+
+    - name: Deploy to Tomcat
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ secrets.REMOTE_IP }}
+        username: ${{ secrets.REMOTE_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          sudo rm -rf /var/lib/tomcat9/webapps/ROOT
+          sudo rm -f /var/lib/tomcat9/webapps/ROOT.war
+          sudo cp /home/ubuntu/deploy/*.war /var/lib/tomcat9/webapps/ROOT.war
+          sudo systemctl restart tomcat9
