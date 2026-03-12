@@ -7,7 +7,7 @@ const default_header = {
 }
 
 const apiClient = axios.create({
-    baseURL: /,
+    baseURL: '/',
     headers: default_header,
 });
 
