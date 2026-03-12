@@ -20,7 +20,7 @@ jobs:
     - name: Install & Build Frontend
       run: |
         cd infoshare-page
-        npm install
+        npm install --legacy-peer-deps
         npm run build
 
     # 2. 프론트엔드 빌드 결과물을 백엔드로 복사 (통합)
