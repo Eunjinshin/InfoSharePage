@@ -6,7 +6,7 @@ spring:
     password: "0000"
   sql:
     init:
-      mode: always # 앱 실행 시 schema.sql 파일 실행 (나중엔 never 혹은 지우기) 
+      mode: never # 앱 실행 시 schema.sql 파일 실행 (나중엔 never 혹은 지우기) 
       encoding: UTF-8
   output:
     ansi:
@@ -23,10 +23,14 @@ mybatis:
     map-underscore-to-camel-case: true
 
 server:
-  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 
 file:
-  upload-dir: C:/infoshare_uploads/
+  upload-dir: /home/ubuntu/infoshare_uploads/ # 리눅스 경로로 수정
 
 jwt:
   secret: infoshare-key-for-jwt-token-authentication-key-min-256-bits-super-long
