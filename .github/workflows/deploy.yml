@@ -53,7 +53,7 @@ jobs:
         target: "/home/ubuntu/deploy"
         strip_components: 3
 
-    # 5. 서버 배포 및 톰캣 재시작
+# 5. 서버 배포 및 권한 강제 설정
     - name: Deploy to Tomcat
       uses: appleboy/ssh-action@v0.1.10
       with:
@@ -61,18 +61,17 @@ jobs:
         username: ${{ secrets.REMOTE_USER }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          mkdir -p /home/ubuntu/deploy
+          # 1. 기존 배포물 완전 삭제
           sudo rm -rf /var/lib/tomcat9/webapps/ROOT
           sudo rm -f /var/lib/tomcat9/webapps/ROOT.war
           
-          # plain이 붙지 않은 실행 가능한 war 선택
+          # 2. 최신 WAR 파일 복사 (이름을 ROOT.war로 고정)
           WAR_FILE=$(ls -t /home/ubuntu/deploy/*.war | grep -v "plain" | head -n 1)
+          sudo cp "$WAR_FILE" /var/lib/tomcat9/webapps/ROOT.war
           
-          if [ -n "$WAR_FILE" ]; then
-            sudo cp "$WAR_FILE" /var/lib/tomcat9/webapps/ROOT.war
-            sudo systemctl restart tomcat9
-            echo "Integrated Deployment Successful!"
-          else
-            echo "WAR file not found!"
-            exit 1
-          fi
+          # 3. 톰캣이 파일을 잘 풀 수 있도록 권한 부여
+          sudo chown tomcat:tomcat /var/lib/tomcat9/webapps/ROOT.war
+          sudo chmod 644 /var/lib/tomcat9/webapps/ROOT.war
+          
+          # 4. 톰캣 재시작
+          sudo systemctl restart tomcat9
